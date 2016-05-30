@@ -25,4 +25,28 @@ public class GoodList {
 
     public GoodList() {
     }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public int getGoodsid() {
+        return goodsid;
+    }
+
+    public void setGoodsid(int goodsid) {
+        this.goodsid = goodsid;
+    }
+
+    public int getOrderid() {
+        return orderid;
+    }
+
+    public void setOrderid(int orderid) {
+        this.orderid = orderid;
+    }
 }

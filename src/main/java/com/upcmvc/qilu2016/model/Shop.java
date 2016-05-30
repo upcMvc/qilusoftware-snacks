@@ -28,4 +28,44 @@ public class Shop {
 
     public Shop() {
     }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public String getCreattime() {
+        return creattime;
+    }
+
+    public void setCreattime(String creattime) {
+        this.creattime = creattime;
+    }
+
+    public String getTitle() {
+        return title;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
+    public int getSellnumber() {
+        return sellnumber;
+    }
+
+    public void setSellnumber(int sellnumber) {
+        this.sellnumber = sellnumber;
+    }
+
+    public String getConnect() {
+        return connect;
+    }
+
+    public void setConnect(String connect) {
+        this.connect = connect;
+    }
 }

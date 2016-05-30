@@ -35,18 +35,6 @@ public class User {
     public User() {
     }
 
-    public void setId(int id) {
-        id = id;
-    }
-
-    public void setUsername(String username) {
-        this.username = username;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
-    }
-
     public int getId() {
         return id;
     }
@@ -57,5 +45,41 @@ public class User {
 
     public String getPassword() {
         return password;
+    }
+
+    public String getCreattime() {
+        return creattime;
+    }
+
+    public boolean isStatus() {
+        return status;
+    }
+
+    public int getSellerid() {
+        return sellerid;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    public void setCreattime(String creattime) {
+        this.creattime = creattime;
+    }
+
+    public void setStatus(boolean status) {
+        this.status = status;
+    }
+
+    public void setSellerid(int sellerid) {
+        this.sellerid = sellerid;
     }
 }
