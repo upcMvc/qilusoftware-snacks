@@ -12,10 +12,20 @@ import javax.persistence.Id;
 public class Shop {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private int Id;
+    private int id;
 
     private String creattime;
     private String title;
     private int sellnumber;
     private String connect;
+
+    public Shop(String creattime, String title, int sellnumber, String connect) {
+        this.creattime = creattime;
+        this.title = title;
+        this.sellnumber = sellnumber;
+        this.connect = connect;
+    }
+
+    public Shop() {
+    }
 }

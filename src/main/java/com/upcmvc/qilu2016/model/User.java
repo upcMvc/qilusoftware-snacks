@@ -13,10 +13,10 @@ import javax.persistence.Id;
 @Entity
 public class User {
     @Id
-    @GeneratedValue (
+    @GeneratedValue(
             strategy = GenerationType.AUTO
     )
-    private int Id;
+    private int id;
 
     private String username;
     private String password;
@@ -24,8 +24,19 @@ public class User {
     private boolean status;
     private int sellerid;
 
+    public User(String password, String username, String creattime, boolean status, int sellerid) {
+        this.password = password;
+        this.username = username;
+        this.creattime = creattime;
+        this.status = status;
+        this.sellerid = sellerid;
+    }
+
+    public User() {
+    }
+
     public void setId(int id) {
-        Id = id;
+        id = id;
     }
 
     public void setUsername(String username) {
@@ -37,7 +48,7 @@ public class User {
     }
 
     public int getId() {
-        return Id;
+        return id;
     }
 
     public String getUsername() {

@@ -13,9 +13,18 @@ import javax.persistence.Id;
 public class ShopKeeper {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private int Id;
+    private int id;
 
     private String creattime;
     private String name;
     private int shopid;
+
+    public ShopKeeper(String creattime, String name, int shopid) {
+        this.creattime = creattime;
+        this.name = name;
+        this.shopid = shopid;
+    }
+
+    public ShopKeeper() {
+    }
 }

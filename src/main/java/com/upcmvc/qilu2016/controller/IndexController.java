@@ -12,9 +12,10 @@ import org.springframework.web.bind.annotation.RequestMethod;
 public class IndexController {
 
     @RequestMapping({"/"})
-    public String showIndex(){
+    public String showIndex() {
         return "reg";
     }
+
     @RequestMapping(value = "/reg", method = RequestMethod.POST)
     public String regUser(String username, String password) {
 
