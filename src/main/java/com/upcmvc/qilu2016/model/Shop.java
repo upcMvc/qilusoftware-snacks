@@ -18,12 +18,15 @@ public class Shop {
     private String title;
     private int sellnumber;
     private String connect;
+    private String updatetime;
+    private boolean isdelete = false;
 
-    public Shop(String creattime, String title, int sellnumber, String connect) {
+    public Shop(String creattime, String title, int sellnumber, String connect,String updatetime) {
         this.creattime = creattime;
         this.title = title;
         this.sellnumber = sellnumber;
         this.connect = connect;
+        this.updatetime = updatetime ;
     }
 
     public Shop() {
@@ -67,5 +70,21 @@ public class Shop {
 
     public void setConnect(String connect) {
         this.connect = connect;
+    }
+
+    public boolean isdelete() {
+        return isdelete;
+    }
+
+    public void setIsdelete(boolean isdelete) {
+        this.isdelete = isdelete;
+    }
+
+    public String getUpdatetime() {
+        return updatetime;
+    }
+
+    public void setUpdatetime(String updatetime) {
+        this.updatetime = updatetime;
     }
 }

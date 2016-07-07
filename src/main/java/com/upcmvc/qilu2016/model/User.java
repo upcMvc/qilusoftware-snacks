@@ -23,13 +23,16 @@ public class User {
     private String creattime;
     private boolean status;
     private int sellerid;
+    private String updatetime;
+    private boolean isdelete = false;
 
-    public User(String password, String username, String creattime, boolean status, int sellerid) {
+    public User(String password, String username, String creattime, boolean status, int sellerid,String updatetime) {
         this.password = password;
         this.username = username;
         this.creattime = creattime;
         this.status = status;
         this.sellerid = sellerid;
+        this.updatetime = updatetime;
     }
 
     public User() {
@@ -81,5 +84,21 @@ public class User {
 
     public void setSellerid(int sellerid) {
         this.sellerid = sellerid;
+    }
+
+    public boolean isdelete() {
+        return isdelete;
+    }
+
+    public void setIsdelete(boolean isdelete) {
+        this.isdelete = isdelete;
+    }
+
+    public String getUpdatetime() {
+        return updatetime;
+    }
+
+    public void setUpdatetime(String updatetime) {
+        this.updatetime = updatetime;
     }
 }

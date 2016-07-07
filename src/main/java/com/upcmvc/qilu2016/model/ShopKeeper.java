@@ -18,11 +18,14 @@ public class ShopKeeper {
     private String creattime;
     private String name;
     private int shopid;
+    private String updatetime;
+    private boolean isdelete = false;
 
-    public ShopKeeper(String creattime, String name, int shopid) {
+    public ShopKeeper(String creattime, String name, int shopid,String updatetime) {
         this.creattime = creattime;
         this.name = name;
         this.shopid = shopid;
+        this.updatetime = updatetime;
     }
 
     public ShopKeeper() {
@@ -58,5 +61,21 @@ public class ShopKeeper {
 
     public void setShopid(int shopid) {
         this.shopid = shopid;
+    }
+
+    public String getUpdatetime() {
+        return updatetime;
+    }
+
+    public void setUpdatetime(String updatetime) {
+        this.updatetime = updatetime;
+    }
+
+    public boolean isdelete() {
+        return isdelete;
+    }
+
+    public void setIsdelete(boolean isdelete) {
+        this.isdelete = isdelete;
     }
 }

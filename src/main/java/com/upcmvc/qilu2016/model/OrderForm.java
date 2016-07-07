@@ -19,10 +19,13 @@ public class OrderForm {
 
     private int customerid;
     private String creattime;
+    private String updatetime;
+    private boolean isdelete = false;
 
-    public OrderForm(int customerid, String creattime) {
+    public OrderForm(int customerid, String creattime,String updatetime) {
         this.customerid = customerid;
         this.creattime = creattime;
+        this.updatetime = updatetime;
     }
 
     public OrderForm() {
@@ -50,5 +53,21 @@ public class OrderForm {
 
     public void setCreattime(String creattime) {
         this.creattime = creattime;
+    }
+
+    public String getUpdatetime() {
+        return updatetime;
+    }
+
+    public void setUpdatetime(String updatetime) {
+        this.updatetime = updatetime;
+    }
+
+    public boolean isdelete() {
+        return isdelete;
+    }
+
+    public void setIsdelete(boolean isdelete) {
+        this.isdelete = isdelete;
     }
 }

@@ -19,13 +19,17 @@ public class Goods {
     private double price;
     private String name;
     private String creattime;
+    private String updatetime;
+    private boolean isdelete = false;
 
-    public Goods(int shopid, int number, double price, String name, String creattime) {
+
+    public Goods(int shopid, int number, double price, String name, String creattime,String updatetime) {
         this.shopid = shopid;
         this.number = number;
         this.price = price;
         this.name = name;
         this.creattime = creattime;
+        this.updatetime = updatetime;
     }
 
     public Goods() {
@@ -77,5 +81,21 @@ public class Goods {
 
     public void setCreattime(String creattime) {
         this.creattime = creattime;
+    }
+
+    public String getUpdatetime() {
+        return updatetime;
+    }
+
+    public void setUpdatetime(String updatetime) {
+        this.updatetime = updatetime;
+    }
+
+    public boolean isdelete() {
+        return isdelete;
+    }
+
+    public void setIsdelete(boolean isdelete) {
+        this.isdelete = isdelete;
     }
 }

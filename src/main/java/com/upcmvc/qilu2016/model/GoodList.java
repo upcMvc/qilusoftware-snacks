@@ -17,10 +17,24 @@ public class GoodList {
 
     private int goodsid;
     private int orderid;
+    private String createtime;
+    private String updatetime;
+    private boolean isdelete = false;
 
-    public GoodList(int goodsid, int orderid) {
+
+    public GoodList(int goodsid, int orderid,String createtime,String updatetime) {
         this.goodsid = goodsid;
         this.orderid = orderid;
+        this.createtime = createtime;
+        this.updatetime = updatetime;
+    }
+
+    public String getUpdatetime() {
+        return updatetime;
+    }
+
+    public void setUpdatetime(String updatetime) {
+        this.updatetime = updatetime;
     }
 
     public GoodList() {
@@ -48,5 +62,21 @@ public class GoodList {
 
     public void setOrderid(int orderid) {
         this.orderid = orderid;
+    }
+
+    public String getCreatetime() {
+        return createtime;
+    }
+
+    public void setCreatetime(String createtime) {
+        this.createtime = createtime;
+    }
+
+    public boolean isdelete() {
+        return isdelete;
+    }
+
+    public void setIsdelete(boolean isdelete) {
+        this.isdelete = isdelete;
     }
 }
