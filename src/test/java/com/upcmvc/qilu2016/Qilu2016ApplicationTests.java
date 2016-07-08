@@ -1,5 +1,6 @@
 package com.upcmvc.qilu2016;
 
+import com.upcmvc.qilu2016.util.MailUtils;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.boot.test.SpringApplicationConfiguration;
@@ -13,6 +14,8 @@ public class Qilu2016ApplicationTests {
 
 	@Test
 	public void contextLoads() {
+		MailUtils mailUtils = new MailUtils();
+		mailUtils.send("710801583@qq.com","cheng");
 	}
 
 }

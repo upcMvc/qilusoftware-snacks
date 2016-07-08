@@ -21,3 +21,9 @@ spring:
         AppSecret: "123"
         adminUsername: "admin@yiban.com"
         adminPassword: "admin"
+mail:
+  host: smtp.sina.com
+  protocol: smtp
+  port: 25
+  form: upcmvc@sina.com
+  password: upcmvc
