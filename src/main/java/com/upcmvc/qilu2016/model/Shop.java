@@ -1,36 +1,36 @@
 package com.upcmvc.qilu2016.model;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
+import javax.xml.crypto.Data;
+import java.util.Date;
 
 /**
  * Created by lenovo on 2016/5/30.
  */
 @Entity
+@Table(name = "shopship")
 public class Shop {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private int id;
 
+    private String master;//店主
     private String creattime;
-    private String title;
+    private String title;//店名
     private int sellnumber;
-    private String connect;
+    private String connect;//详细介绍
     private String updatetime;
     private boolean isdelete = false;
 
-    public Shop(String creattime, String title, int sellnumber, String connect,String updatetime) {
+    public Shop(String creattime, String title, int sellnumber, String connect,String updatetime,String master) {
         this.creattime = creattime;
         this.title = title;
         this.sellnumber = sellnumber;
         this.connect = connect;
         this.updatetime = updatetime ;
+        this.master = master;
     }
 
-    public Shop() {
-    }
 
     public int getId() {
         return id;
@@ -86,5 +86,24 @@ public class Shop {
 
     public void setUpdatetime(String updatetime) {
         this.updatetime = updatetime;
+    }
+
+    public String getMaster() {
+        return master;
+    }
+
+    public void setMaster(String master) {
+        this.master = master;
+    }
+
+    public void update(int sellnumber,String connect)
+    {
+        this.sellnumber = sellnumber;
+        this.updatetime = new Date().toString();
+        this.connect = connect;
+    }
+    public void delete(){
+        this.updatetime = new Date().toString();
+        this.isdelete = true;
     }
 }

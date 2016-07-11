@@ -32,7 +32,7 @@ public class Goods {
         this.updatetime = updatetime;
     }
 
-    public Goods() {
+    public Goods(int number, double price, String name, String creattime, String updatetime) {
     }
 
     public int getId() {
