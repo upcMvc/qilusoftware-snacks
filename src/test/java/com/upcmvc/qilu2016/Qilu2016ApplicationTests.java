@@ -14,6 +14,10 @@ public class Qilu2016ApplicationTests {
 
 	@Test
 	public void contextLoads() {
+	}
+
+	@Test
+	public void testMail(){
 		MailUtils mailUtils = new MailUtils();
 		mailUtils.send("710801583@qq.com","cheng");
 	}

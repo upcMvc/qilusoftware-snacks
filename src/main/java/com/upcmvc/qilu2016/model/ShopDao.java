@@ -11,6 +11,6 @@ import java.util.Iterator;
  */
 public interface ShopDao extends CrudRepository<Shop,Integer> {
 public Iterable<Shop> findByTitleOrMaster(String title,String master);
-public Iterable<Shop> findByIsdeleteByIdDesc(boolean isdelete);
+public Iterable<Shop> findByIsdeleteOrderByIdDesc(boolean isdelete);
 
 }
