@@ -2,6 +2,8 @@ package com.upcmvc.qilu2016.util;
 
 //import org.springframework.boot.autoconfigure.web.ServerProperties;
 
+import com.upcmvc.qilu2016.config.Config;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 
 import javax.mail.*;

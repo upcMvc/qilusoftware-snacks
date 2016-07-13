@@ -10,8 +10,11 @@ import java.util.Iterator;
 /**
  * Created by lenovo on 2016/5/30.
  */
-public interface ShopDao extends CrudRepository<Shop,Integer> {
-public Shop findById(int id);
-public Shop findByIsdeleteOrderByIdDesc(boolean isdelete);
+public interface ShopDao extends CrudRepository<Shop, Integer> {
+    public Shop findById(int id);
+
+    public Shop findByIsdeleteOrderByIdDesc(boolean isdelete);
+
+    public Iterable<Shop> findByTitleOrMaster(String title, String master);
 
 }

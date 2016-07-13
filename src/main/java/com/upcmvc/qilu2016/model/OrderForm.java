@@ -8,7 +8,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
 /**
- *订单
+ * 订单
  * Created by lenovo on 2016/5/30.
  */
 @Entity
@@ -23,7 +23,7 @@ public class OrderForm {
     private String updatetime;
     private boolean isdelete = false;
 
-    public OrderForm(int customerid, String creattime,String updatetime) {
+    public OrderForm(int customerid, String creattime, String updatetime) {
         this.customerid = customerid;
         this.creattime = creattime;
         this.updatetime = updatetime;
