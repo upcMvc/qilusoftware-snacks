@@ -15,22 +15,24 @@ public class Shop {
     private int id;
 
     private String master;//店主
-    private String creattime;
     private String title;//店名
     private int sellnumber;
     private String connect;//详细介绍
+
+    private String creattime;
     private String updatetime;
     private boolean isdelete = false;
 
-    public Shop(String creattime, String title, int sellnumber, String connect,String updatetime,String master) {
+
+    public Shop(String master, String creattime, String title, int sellnumber, String connect, String updatetime) {
+        this.master = master;
         this.creattime = creattime;
         this.title = title;
         this.sellnumber = sellnumber;
         this.connect = connect;
-        this.updatetime = updatetime ;
-        this.master = master;
+        this.updatetime = updatetime;
     }
-
+    public Shop(){}//空的构造函数
 
     public int getId() {
         return id;

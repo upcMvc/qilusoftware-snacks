@@ -1,5 +1,6 @@
-package com.upcmvc.qilu2016.model;
+package com.upcmvc.qilu2016.dao;
 
+import com.upcmvc.qilu2016.model.OrderForm;
 import org.springframework.data.repository.CrudRepository;
 
 /**

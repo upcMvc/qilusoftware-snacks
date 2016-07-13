@@ -15,9 +15,10 @@ public class ShopKeeper {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private int id;
 
-    private String creattime;
     private String name;
     private int shopid;
+
+    private String creattime;
     private String updatetime;
     private boolean isdelete = false;
 
@@ -29,7 +30,7 @@ public class ShopKeeper {
     }
 
     public ShopKeeper() {
-    }
+    }//空的构造函数
 
     public int getId() {
         return id;

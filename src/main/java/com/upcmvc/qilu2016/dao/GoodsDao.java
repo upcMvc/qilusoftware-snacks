@@ -1,5 +1,6 @@
-package com.upcmvc.qilu2016.model;
+package com.upcmvc.qilu2016.dao;
 
+import com.upcmvc.qilu2016.model.Goods;
 import org.springframework.data.repository.CrudRepository;
 
 /**
@@ -7,5 +8,5 @@ import org.springframework.data.repository.CrudRepository;
  */
 public interface GoodsDao extends CrudRepository<Goods,Integer>{
 
-    public GoodsDao findByShopid(int shopid);
+    public GoodsDao findByShopidAndName(int shopid,String name);
 }

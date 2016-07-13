@@ -20,23 +20,27 @@ public class User {
 
     private String username;
     private String password;
-    private String creattime;
     private boolean status;
     private int sellerid;
+    private String url;
+
+    private String creattime;
     private String updatetime;
     private boolean isdelete = false;
 
-    public User(String password, String username, String creattime, boolean status, int sellerid,String updatetime) {
-        this.password = password;
+
+    public User(String username, String password, boolean status, int sellerid, String url, String creattime, String updatetime) {
         this.username = username;
-        this.creattime = creattime;
+        this.password = password;
         this.status = status;
         this.sellerid = sellerid;
+        this.url = url;
+        this.creattime = creattime;
         this.updatetime = updatetime;
     }
 
     public User() {
-    }
+    } //空的构造函数
 
     public int getId() {
         return id;
@@ -100,5 +104,13 @@ public class User {
 
     public void setUpdatetime(String updatetime) {
         this.updatetime = updatetime;
+    }
+
+    public String getUrl() {
+        return url;
+    }
+
+    public void setUrl(String url) {
+        this.url = url;
     }
 }

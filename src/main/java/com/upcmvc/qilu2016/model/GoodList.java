@@ -17,6 +17,7 @@ public class GoodList {
 
     private int goodsid;
     private int orderid;
+
     private String createtime;
     private String updatetime;
     private boolean isdelete = false;

@@ -1,5 +1,6 @@
-package com.upcmvc.qilu2016;
+package com.upcmvc;
 
+import com.upcmvc.qilu2016.Qilu2016Application;
 import com.upcmvc.qilu2016.util.MailUtils;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -18,4 +19,8 @@ public class Qilu2016ApplicationTests {
 		mailUtils.send("710801583@qq.com","cheng");
 	}
 
+	@Test
+	public void update(){
+
+	}
 }

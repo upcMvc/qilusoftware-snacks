@@ -4,6 +4,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import java.util.Date;
 
 /**
  * Created by lenovo on 2016/5/30.
@@ -18,16 +19,19 @@ public class Goods {
     private int number;
     private double price;
     private String name;
+    private String url;
+
     private String creattime;
     private String updatetime;
     private boolean isdelete = false;
 
 
-    public Goods(int shopid, int number, double price, String name, String creattime,String updatetime) {
+    public Goods(int shopid, int number, double price, String name, String url, String creattime, String updatetime) {
         this.shopid = shopid;
         this.number = number;
         this.price = price;
         this.name = name;
+        this.url = url;
         this.creattime = creattime;
         this.updatetime = updatetime;
     }
@@ -98,4 +102,23 @@ public class Goods {
     public void setIsdelete(boolean isdelete) {
         this.isdelete = isdelete;
     }
+
+    public String getUrl() {
+        return url;
+    }
+
+    public void setUrl(String url) {
+        this.url = url;
+    }
+
+    public void delete(){
+        this.isdelete = true;
+        this.updatetime = new Date().toString();
+    }
+
+    public void update(int number,double price){
+
+
+    }
+
 }

@@ -15,12 +15,12 @@ spring:
         dialect: org.hibernate.dialect.MySQL5Dialect
   thymeleaf:
       mode: LEGACYHTML5
-  myconfig:
-        client_id: "123"
-        redirect_uri: "154"
-        AppSecret: "123"
-        adminUsername: "admin@yiban.com"
-        adminPassword: "admin"
+myconfig:
+      client_id: "123"
+      redirect_uri: "154"
+      AppSecret: "123"
+      adminUsername: "admin@yiban.com"
+      adminPassword: "admin"
 mail:
   host: smtp.sina.com
   protocol: smtp
