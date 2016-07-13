@@ -1,15 +1,13 @@
 package com.upcmvc.qilu2016.model;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 import java.util.Date;
 
 /**
  * Created by lenovo on 2016/5/30.
  */
 @Entity
+@Table(name = "goods")
 public class Goods {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -20,18 +18,20 @@ public class Goods {
     private double price;
     private String name;
     private String url;
+    private String describe;
 
     private String creattime;
     private String updatetime;
     private boolean isdelete = false;
 
 
-    public Goods(int shopid, int number, double price, String name, String url, String creattime, String updatetime) {
+    public Goods(int shopid, int number, double price, String name, String url, String describe, String creattime, String updatetime) {
         this.shopid = shopid;
         this.number = number;
         this.price = price;
         this.name = name;
         this.url = url;
+        this.describe = describe;
         this.creattime = creattime;
         this.updatetime = updatetime;
     }
@@ -111,14 +111,24 @@ public class Goods {
         this.url = url;
     }
 
+    public String getDescribe() {
+        return describe;
+    }
+
+    public void setDescribe(String describe) {
+        this.describe = describe;
+    }
+
     public void delete(){
         this.isdelete = true;
         this.updatetime = new Date().toString();
     }
 
-    public void update(int number,double price){
-
-
+    public void update(int number,double price,String describe){
+        this.number = number;
+        this.price = price;
+        this.describe = describe;
+        this.updatetime = new Date().toString();
     }
 
 }

@@ -21,17 +21,17 @@ public class LoginController {
     LoginService loginService;
     @Autowired
     HttpSession httpSession;
-   @Value("${myconfig.adminUsername}")
+    @Value("${myconfig.adminUsername}")
     private static String adminUsername;
     @Value("${myconfig.adminPassword}")
     private static String adminPassword;
 
-   @RequestMapping("/")
-    public Object login (String admin,String password){
-       if(admin.equals(adminUsername)&&password.equals(adminPassword))
-       {httpSession.setAttribute("admin",true);
-       return new JsonMes(1,"登陆成功");
-       }
-       return new JsonMes(0,"用户名或密码错误");
-   }
+    @RequestMapping("/")
+    public Object login(String admin, String password) {
+        if (admin.equals(adminUsername) && password.equals(adminPassword)) {
+            httpSession.setAttribute("admin", true);
+            return new JsonMes(1, "登陆成功");
+        }
+        return new JsonMes(0, "用户名或密码错误");
+    }
 }
