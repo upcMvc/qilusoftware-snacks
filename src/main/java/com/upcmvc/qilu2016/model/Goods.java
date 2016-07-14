@@ -116,7 +116,7 @@ public class Goods {
         this.updatetime = new Date().toString();
     }
 
-    public void update(int number,double price){
+    public void update(int number, double price, String describe){
 
 
     }

@@ -1,9 +1,11 @@
 package com.upcmvc.qilu2016.controller;
 
 import com.upcmvc.qilu2016.dao.ShopDao;
+import com.upcmvc.qilu2016.dao.UserDao;
 import com.upcmvc.qilu2016.dto.JsonMes;
 import com.upcmvc.qilu2016.model.Shop;
 import com.upcmvc.qilu2016.oauth.qq.QQOauth;
+import com.upcmvc.qilu2016.model.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -25,22 +27,27 @@ public class IndexController {
     @Autowired
     private ShopDao shopDao;
 
+    @Autowired
+    private UserDao userDao;
+
+
     /*
     根据 title 和 maste 查找
      */
     @RequestMapping("/")
     public Object showGoods(int id) {
-        return shopDao.findById(id);
+        return shopDao.findOne(id);
     }
 
 
-    @RequestMapping("/213/214")
-    public Object createGoods(String creattime, String title, int sellnumber, String connect, String updatetime, String master) {
-
-        Shop shop = new Shop(master, creattime, title, sellnumber, connect, updatetime);
-        shopDao.save(shop);
-        return new JsonMes(1, "创建成功");
-    }
+//    @RequestMapping("/213/214")
+//    public Object createGoods(String creattime, String title, int sellnumber, String connect, String updatetime, String master) {
+//        int id =
+//
+//        Shop shop = new Shop(id,master, creattime, title, sellnumber, connect, updatetime);
+//        shopDao.save(shop);
+//        return new JsonMes(1, "创建成功");
+//    }
 
     @RequestMapping("/hkh/ghj")
     public Object deleteGoods(@RequestParam(value = "id", defaultValue = "0") int id) {

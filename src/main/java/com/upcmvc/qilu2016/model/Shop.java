@@ -14,6 +14,7 @@ public class Shop {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private int id;
 
+    private int userid;//和user绑定，来确定user的信息
     private String master;//店主
     private String title;//店名
     private int sellnumber;
@@ -24,14 +25,16 @@ public class Shop {
     private boolean isdelete = false;
 
 
-    public Shop(String master, String creattime, String title, int sellnumber, String connect, String updatetime) {
+    public Shop(int userid, String master, String title, int sellnumber, String connect, String creattime, String updatetime) {
+        this.userid = userid;
         this.master = master;
-        this.creattime = creattime;
         this.title = title;
         this.sellnumber = sellnumber;
         this.connect = connect;
+        this.creattime = creattime;
         this.updatetime = updatetime;
     }
+
     public Shop(){}//空的构造函数
 
     public int getId() {
@@ -98,7 +101,15 @@ public class Shop {
         this.master = master;
     }
 
-    public void update(int sellnumber,String connect)
+    public int getUserid() {
+        return userid;
+    }
+
+    public void setUserid(int userid) {
+        this.userid = userid;
+    }
+
+    public void update(int sellnumber, String connect)
     {
         this.sellnumber = sellnumber;
         this.updatetime = new Date().toString();

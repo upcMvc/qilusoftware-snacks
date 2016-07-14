@@ -21,6 +21,7 @@ public class User {
     private String username;
     private String password;
     private boolean status;
+    private String phone;
     private int sellerid;
     private String url;
 
@@ -29,10 +30,11 @@ public class User {
     private boolean isdelete = false;
 
 
-    public User(String username, String password, boolean status, int sellerid, String url, String creattime, String updatetime) {
+    public User(String username, String password, boolean status, String phone, int sellerid, String url, String creattime, String updatetime) {
         this.username = username;
         this.password = password;
         this.status = status;
+        this.phone = phone;
         this.sellerid = sellerid;
         this.url = url;
         this.creattime = creattime;
@@ -112,5 +114,13 @@ public class User {
 
     public void setUrl(String url) {
         this.url = url;
+    }
+
+    public String getPhone() {
+        return phone;
+    }
+
+    public void setPhone(String phone) {
+        this.phone = phone;
     }
 }
