@@ -17,25 +17,23 @@ public class Shop {
     private int userid;//和user绑定，来确定user的信息
     private String master;//店主
     private String title;//店名
-    private int sellnumber;
-    private String connect;//详细介绍
+    private String detail;//详细介绍
 
     private String creattime;
     private String updatetime;
     private boolean isdelete = false;
 
+    public Shop(){
+    }
 
-    public Shop(int userid, String master, String title, int sellnumber, String connect, String creattime, String updatetime) {
+    public Shop(int userid, String master, String title, String detail) {
         this.userid = userid;
         this.master = master;
         this.title = title;
-        this.sellnumber = sellnumber;
-        this.connect = connect;
-        this.creattime = creattime;
-        this.updatetime = updatetime;
+        this.detail = detail;
+        this.creattime = new Date().toString();
+        this.updatetime = new Date().toString();
     }
-
-    public Shop(){}//空的构造函数
 
     public int getId() {
         return id;
@@ -43,62 +41,6 @@ public class Shop {
 
     public void setId(int id) {
         this.id = id;
-    }
-
-    public String getCreattime() {
-        return creattime;
-    }
-
-    public void setCreattime(String creattime) {
-        this.creattime = creattime;
-    }
-
-    public String getTitle() {
-        return title;
-    }
-
-    public void setTitle(String title) {
-        this.title = title;
-    }
-
-    public int getSellnumber() {
-        return sellnumber;
-    }
-
-    public void setSellnumber(int sellnumber) {
-        this.sellnumber = sellnumber;
-    }
-
-    public String getConnect() {
-        return connect;
-    }
-
-    public void setConnect(String connect) {
-        this.connect = connect;
-    }
-
-    public boolean isdelete() {
-        return isdelete;
-    }
-
-    public void setIsdelete(boolean isdelete) {
-        this.isdelete = isdelete;
-    }
-
-    public String getUpdatetime() {
-        return updatetime;
-    }
-
-    public void setUpdatetime(String updatetime) {
-        this.updatetime = updatetime;
-    }
-
-    public String getMaster() {
-        return master;
-    }
-
-    public void setMaster(String master) {
-        this.master = master;
     }
 
     public int getUserid() {
@@ -109,14 +51,51 @@ public class Shop {
         this.userid = userid;
     }
 
-    public void update(int sellnumber, String connect)
-    {
-        this.sellnumber = sellnumber;
-        this.updatetime = new Date().toString();
-        this.connect = connect;
+    public String getMaster() {
+        return master;
     }
-    public void delete(){
-        this.updatetime = new Date().toString();
-        this.isdelete = true;
+
+    public void setMaster(String master) {
+        this.master = master;
+    }
+
+    public String getTitle() {
+        return title;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
+    public String getDetail() {
+        return detail;
+    }
+
+    public void setDetail(String detail) {
+        this.detail = detail;
+    }
+
+    public String getCreattime() {
+        return creattime;
+    }
+
+    public void setCreattime(String creattime) {
+        this.creattime = creattime;
+    }
+
+    public String getUpdatetime() {
+        return updatetime;
+    }
+
+    public void setUpdatetime(String updatetime) {
+        this.updatetime = updatetime;
+    }
+
+    public boolean isdelete() {
+        return isdelete;
+    }
+
+    public void setIsdelete(boolean isdelete) {
+        this.isdelete = isdelete;
     }
 }

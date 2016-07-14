@@ -37,7 +37,6 @@ public class LoginController {
         String token = qqOauth.getToken(qqOauth.getTokenAndRefresh(code));
         String idstr = qqOauth.getOpenId(token);
         QQInfo qqInfo = qqOauth.getQQinfo(idstr);
-
         return "success";
     }
 

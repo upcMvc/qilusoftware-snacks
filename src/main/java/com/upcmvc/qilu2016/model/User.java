@@ -6,98 +6,111 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import java.util.Date;
 
 /**
  * Created by lenovo on 2016/5/30.
  */
 @Entity
 public class User {
+
     @Id
-    @GeneratedValue(
-            strategy = GenerationType.AUTO
-    )
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private int id;
+
+    private String qqopenid;
 
     private String username;
     private String password;
-    private boolean status;
-    private String phone;
+    private boolean ismaster;
     private int sellerid;
-    private String url;
+    private String phone;
+    private String imgurl;
 
     private String creattime;
     private String updatetime;
     private boolean isdelete = false;
 
-
-    public User(String username, String password, boolean status, String phone, int sellerid, String url, String creattime, String updatetime) {
+    public User(String qqopenid, String username, String phone, String imgurl) {
+        this.qqopenid = qqopenid;
         this.username = username;
-        this.password = password;
-        this.status = status;
         this.phone = phone;
-        this.sellerid = sellerid;
-        this.url = url;
-        this.creattime = creattime;
-        this.updatetime = updatetime;
-    }
+        this.imgurl = imgurl;
+        this.creattime = new Date().toString();
+        this.updatetime = new Date().toString();
 
-    public User() {
-    } //空的构造函数
+    }
 
     public int getId() {
         return id;
-    }
-
-    public String getUsername() {
-        return username;
-    }
-
-    public String getPassword() {
-        return password;
-    }
-
-    public String getCreattime() {
-        return creattime;
-    }
-
-    public boolean isStatus() {
-        return status;
-    }
-
-    public int getSellerid() {
-        return sellerid;
     }
 
     public void setId(int id) {
         this.id = id;
     }
 
+    public String getQqopenid() {
+        return qqopenid;
+    }
+
+    public void setQqopenid(String qqopenid) {
+        this.qqopenid = qqopenid;
+    }
+
+    public String getUsername() {
+        return username;
+    }
+
     public void setUsername(String username) {
         this.username = username;
+    }
+
+    public String getPassword() {
+        return password;
     }
 
     public void setPassword(String password) {
         this.password = password;
     }
 
-    public void setCreattime(String creattime) {
-        this.creattime = creattime;
+    public boolean ismaster() {
+        return ismaster;
     }
 
-    public void setStatus(boolean status) {
-        this.status = status;
+    public void setIsmaster(boolean ismaster) {
+        this.ismaster = ismaster;
+    }
+
+    public int getSellerid() {
+        return sellerid;
     }
 
     public void setSellerid(int sellerid) {
         this.sellerid = sellerid;
     }
 
-    public boolean isdelete() {
-        return isdelete;
+    public String getPhone() {
+        return phone;
     }
 
-    public void setIsdelete(boolean isdelete) {
-        this.isdelete = isdelete;
+    public void setPhone(String phone) {
+        this.phone = phone;
+    }
+
+    public String getImgurl() {
+        return imgurl;
+    }
+
+    public void setImgurl(String imgurl) {
+        this.imgurl = imgurl;
+    }
+
+    public String getCreattime() {
+        return creattime;
+    }
+
+    public void setCreattime(String creattime) {
+        this.creattime = creattime;
     }
 
     public String getUpdatetime() {
@@ -108,19 +121,14 @@ public class User {
         this.updatetime = updatetime;
     }
 
-    public String getUrl() {
-        return url;
+    public boolean isdelete() {
+        return isdelete;
     }
 
-    public void setUrl(String url) {
-        this.url = url;
+    public void setIsdelete(boolean isdelete) {
+        this.isdelete = isdelete;
     }
 
-    public String getPhone() {
-        return phone;
-    }
-
-    public void setPhone(String phone) {
-        this.phone = phone;
-    }
+    public User() {
+    } //空的构造函数
 }
