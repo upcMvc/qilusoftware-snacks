@@ -10,19 +10,16 @@ import org.springframework.stereotype.Component;
 @Component
 public class Config {
 
-    @Value("${mail.host}")
-    public String host;
+    @Value("${qqoauth.appid}")
+    public String appid ;
 
-    @Value("${mail.protocol}")
-    public String protocol;
+    @Value("${qqoauth.appkey}")
+    public String appkey;
 
-    @Value("${mail.port}")
-    public int port;
+    @Value("${qqoauth.redirect}")
+    public String redirect_url;
 
-    @Value("${mail.form}")
-    public String from;
-
-    @Value("${mail.password}")
-    public String password;
+    @Value("${qqoauth.state}")
+    public String state ;
 
 }

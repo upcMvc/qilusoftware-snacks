@@ -21,6 +21,7 @@ public class GoodsController {
     @Autowired
     private ShopDao shopDao;
 
+
     @RequestMapping("/cgh")
     public Object createGood(int number, double price, String name, String creattime, String updatetime) {
         Goods goods = new Goods(number, price, name, creattime, updatetime);

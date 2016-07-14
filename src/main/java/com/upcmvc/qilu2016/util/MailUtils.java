@@ -18,19 +18,14 @@ import java.util.Properties;
  */
 public class MailUtils {
 
-    @Value("${mail.host}")
     public static String HOST = "smtp.sina.com";
 
-    @Value("${mail.protocol}")
     public static String PROTOCOL = "smtp";
 
-    @Value("${mail.port}")
     public static int PORT = 25;
 
-    @Value("${mail.port}")
     public static String FROM = "upcmvc@sina.com";//发件人的email
 
-    @Value("${mail.password}")
     public static String PWD = "qilu2016";//发件人密码
 
     /**
