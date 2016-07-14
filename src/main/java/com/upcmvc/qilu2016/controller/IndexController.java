@@ -29,7 +29,7 @@ public class IndexController {
 
 
     /*
-    根据 title 和 maste 查找
+    根据 id 查找
      */
     @RequestMapping("/")
     public Object showGoods(int id) {
@@ -37,14 +37,13 @@ public class IndexController {
     }
 
 
-//    @RequestMapping("/213/214")
-//    public Object createGoods(String creattime, String title, int sellnumber, String connect, String updatetime, String master) {
-//        int id =
-//
-//        Shop shop = new Shop(id,master, creattime, title, sellnumber, connect, updatetime);
-//        shopDao.save(shop);
-//        return new JsonMes(1, "创建成功");
-//    }
+    @RequestMapping("/213/214")
+    public Object createGoods(int userid,String creattime, String title, int sellnumber, String connect, String updatetime, String master) {
+
+        Shop shop = new Shop( userid,master,title,sellnumber,connect,creattime,updatetime);
+        shopDao.save(shop);
+        return new JsonMes(1, "创建店铺成功");
+    }
 
     @RequestMapping("/hkh/ghj")
     public Object deleteGoods(@RequestParam(value = "id", defaultValue = "0") int id) {
@@ -52,14 +51,14 @@ public class IndexController {
         Shop shop = shopDao.findOne(id);
         shop.delete();
         shopDao.save(shop);
-        return new JsonMes(1, "删除成功");
+        return new JsonMes(1, "删除店铺成功");
     }
 
     @RequestMapping("/das/das")
     public Object update(int id, int sellnumber, String connect) {
-        Shop shop = shopDao.findById(id);
+        Shop shop = shopDao.findOne(id);
         shop.update(sellnumber, connect);
-        return new JsonMes(1, "更新成功");
+        return new JsonMes(1, "更新店铺成功");
     }
 
 }
