@@ -16,12 +16,12 @@ public class GoodsController {
     @Autowired
     GoodsDao goodsDao;
 
-    @RequestMapping("/")
-    public Object createGood( int number, double price, String name, String creattime,String updatetime){
-        Goods goods =new Goods(number,price,name,creattime,updatetime);
-        goodsDao.save(goods);
-        return new JsonMes(1,"创建成功");
-    }
+//    @RequestMapping("/")
+//    public Object createGood( int number, double price, String name, String creattime,String updatetime){
+//        Goods goods =new Goods(number,price,name,creattime,updatetime);
+//        goodsDao.save(goods);
+//        return new JsonMes(1,"创建成功");
+//    }
 
     @RequestMapping("/dsa5")
     public Object deleteGood(int shopid,String name){

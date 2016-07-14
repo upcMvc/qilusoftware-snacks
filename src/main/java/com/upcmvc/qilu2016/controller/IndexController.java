@@ -3,12 +3,15 @@ package com.upcmvc.qilu2016.controller;
 import com.upcmvc.qilu2016.dao.ShopDao;
 import com.upcmvc.qilu2016.dto.JsonMes;
 import com.upcmvc.qilu2016.model.Shop;
+import com.upcmvc.qilu2016.oauth.qq.QQOauth;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.servlet.http.HttpSession;
+import java.io.IOException;
 
 /**
  * Created by lenovo on 2016/5/30.

@@ -15,15 +15,10 @@ spring:
         dialect: org.hibernate.dialect.MySQL5Dialect
   thymeleaf:
       mode: LEGACYHTML5
-myconfig:
-      client_id: "123"
-      redirect_uri: "154"
-      AppSecret: "123"
-      adminUsername: "admin@yiban.com"
-      adminPassword: "admin"
-mail:
-  host: smtp.sina.com
-  protocol: smtp
-  port: 25
-  form: upcmvc@sina.com
-  password: upcmvc
+qqoauth:
+  appid: "101335412"
+  appkey: "686864ec209fa7a4c2705dda5a6b6c9f"
+  redirect: "mvc.y1code.cn"
+  state: "mvctest"
+server:
+  port: 80
