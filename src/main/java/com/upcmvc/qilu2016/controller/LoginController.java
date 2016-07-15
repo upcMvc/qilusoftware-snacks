@@ -1,8 +1,11 @@
 package com.upcmvc.qilu2016.controller;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonView;
 import com.upcmvc.qilu2016.config.Config;
 import com.upcmvc.qilu2016.dao.UserDao;
 import com.upcmvc.qilu2016.dto.QQClientInfo;
+import com.upcmvc.qilu2016.model.User;
 import com.upcmvc.qilu2016.service.LoginService;
 import com.upcmvc.qilu2016.service.QQOauthService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -33,6 +36,7 @@ public class LoginController {
 
 
     @RequestMapping(value = "/",method = RequestMethod.GET,params = {"code","state=qq"})
+    @JsonIgnore
     public Object dealOauth(String code) throws IOException {
         String token = qqOauthService.getToken(qqOauthService.getTokenAndRefresh(code));
         String idstr = qqOauthService.getOpenId(token);

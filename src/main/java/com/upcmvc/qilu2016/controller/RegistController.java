@@ -1,5 +1,6 @@
 package com.upcmvc.qilu2016.controller;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.upcmvc.qilu2016.dao.UserDao;
 import com.upcmvc.qilu2016.model.User;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,6 +17,7 @@ public class RegistController {
     private UserDao userDao;
 
     @RequestMapping(value = "/regist",params = "state=qq")
+    @JsonIgnore
     public Object regist(String nickname,String figureurl_qq_1,String openid,String phone){
         User user = new User(openid,nickname,phone,figureurl_qq_1);
         userDao.save(user);
