@@ -8,5 +8,4 @@ import org.springframework.data.repository.CrudRepository;
  */
 public interface OrderFormDao extends CrudRepository<OrderForm,Integer> {
     public OrderForm findByCustomerid(String customerid);
-
 }
