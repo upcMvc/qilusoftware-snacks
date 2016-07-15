@@ -4,8 +4,6 @@ import com.upcmvc.qilu2016.dao.ShopDao;
 import com.upcmvc.qilu2016.dao.UserDao;
 import com.upcmvc.qilu2016.dto.JsonMes;
 import com.upcmvc.qilu2016.model.Shop;
-import com.upcmvc.qilu2016.oauth.qq.QQOauth;
-import com.upcmvc.qilu2016.model.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;

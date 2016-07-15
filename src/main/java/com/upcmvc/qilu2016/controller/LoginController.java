@@ -36,10 +36,11 @@ public class LoginController {
     public Object dealOauth(String code) throws IOException {
         String token = qqOauthService.getToken(qqOauthService.getTokenAndRefresh(code));
         String idstr = qqOauthService.getOpenId(token);
-        QQClientInfo qqClientInfo = qqOauthService.getQQinfo(idstr);
+        QQClientInfo qqClientInfo = qqOauthService.getQQclientinfo(idstr);
         if(loginService.isOurUser(qqClientInfo.openid) == true)
             return userDao.findByQqopenid(qqClientInfo.openid);
         else
+            return qqOauthService.getQQInfor(token,qqClientInfo.openid);
     }
 
 }

@@ -3,6 +3,8 @@ package com.upcmvc.qilu2016.service;
 import com.google.gson.Gson;
 import com.upcmvc.qilu2016.config.Config;
 import com.upcmvc.qilu2016.dto.QQClientInfo;
+import com.upcmvc.qilu2016.dto.QQBasicinfo;
+import com.upcmvc.qilu2016.dto.QQInfo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -20,11 +22,7 @@ import java.net.URLEncoder;
 @Service
 public class QQOauthService {
 
-    private static final String grant_type = "authorization_code";
     private static final String gettokenurl = "https://graph.qq.com/oauth2.0/token";
-
-    private static final String response_type = "code";
-    private static final String oauth2url = "https://graph.qq.com/oauth2.0/authorize";
 
     @Autowired
     private Config config;
@@ -64,16 +62,34 @@ public class QQOauthService {
             sb.append(read);
         }
         br.close();
-        System.out.println(sb.toString());
         return sb.toString();
 
     }
 
-    public QQClientInfo getQQinfo(String message){
+    public QQClientInfo getQQclientinfo(String message){
         String str = message.substring(message.indexOf("callback( ") + "callback( ".length(),message.indexOf(" )"));
         Gson gson = new Gson();
         System.out.println(str);
         return gson.fromJson(str,QQClientInfo.class);
+    }
+
+    public Object getQQInfor(String token,String opneid) throws IOException {
+        String charset = "UTF-8";
+        String url = "https://graph.qq.com/user/get_user_info";
+        String sendurl = url + "?oauth_consumer_key=" + config.appid + "&access_token=" + token + "&openid=" + opneid;
+        URLConnection connection = new URL(sendurl).openConnection();
+        connection.setRequestProperty("Accept-Charset",charset);
+        InputStream response = connection.getInputStream();
+        StringBuilder sb=new StringBuilder();
+        BufferedReader br = new BufferedReader(new InputStreamReader(response));
+        String read;
+        while((read=br.readLine()) != null) {
+            sb.append(read);
+        }
+        br.close();
+        Gson gson = new Gson();
+        QQBasicinfo qqBasicinfo = gson.fromJson(sb.toString(),QQBasicinfo.class);
+        return new QQInfo(qqBasicinfo,opneid);
     }
 
 
