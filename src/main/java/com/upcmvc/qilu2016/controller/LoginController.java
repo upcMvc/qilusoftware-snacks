@@ -2,7 +2,7 @@ package com.upcmvc.qilu2016.controller;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonView;
-import com.upcmvc.qilu2016.config.Config;
+import com.upcmvc.qilu2016.Config.Config;
 import com.upcmvc.qilu2016.dao.UserDao;
 import com.upcmvc.qilu2016.dto.QQClientInfo;
 import com.upcmvc.qilu2016.model.User;
