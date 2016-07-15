@@ -11,8 +11,6 @@ import java.util.Iterator;
  * Created by lenovo on 2016/5/30.
  */
 public interface ShopDao extends CrudRepository<Shop, Integer> {
-    public Shop findByIsdeleteOrderByIdDesc(boolean isdelete);
-
-    public Iterable<Shop> findByTitleOrMaster(String title, String master);
+  public Shop findByUserid(int userid);
 
 }

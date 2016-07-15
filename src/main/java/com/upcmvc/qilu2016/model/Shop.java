@@ -18,6 +18,7 @@ public class Shop {
     private String master;//店主
     private String title;//店名
     private String detail;//详细介绍
+    private String imgurl;
 
     private String creattime;
     private String updatetime;
@@ -26,11 +27,12 @@ public class Shop {
     public Shop(){
     }
 
-    public Shop(int userid, String master, String title, String detail) {
+    public Shop(int userid, String master, String title, String detail, String imgurl) {
         this.userid = userid;
         this.master = master;
         this.title = title;
         this.detail = detail;
+        this.imgurl = imgurl;
         this.creattime = new Date().toString();
         this.updatetime = new Date().toString();
     }
@@ -97,5 +99,20 @@ public class Shop {
 
     public void setIsdelete(boolean isdelete) {
         this.isdelete = isdelete;
+    }
+
+    public String getImgurl() {
+        return imgurl;
+    }
+
+    public void setImgurl(String imgurl) {
+        this.imgurl = imgurl;
+    }
+
+    public void update(String master, String title, String detail){
+        this.master = master;
+        this.title = title;
+        this.detail = detail;
+        this.updatetime = new Date().toString();
     }
 }

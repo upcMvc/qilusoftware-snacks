@@ -27,13 +27,108 @@ public class Goods {
     private boolean isdelete = false;
 
 
+    public Goods(int shopid, int number, String price, String name, String imgurl, String describe) {
+        this.shopid = shopid;
+        this.number = number;
+        this.price = price;
+        this.name = name;
+        this.imgurl = imgurl;
+        this.describe = describe;
+        this.creattime = new Date().toString();
+        this.updatetime = new Date().toString();
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public int getShopid() {
+        return shopid;
+    }
+
+    public void setShopid(int shopid) {
+        this.shopid = shopid;
+    }
+
+    public int getNumber() {
+        return number;
+    }
+
+    public void setNumber(int number) {
+        this.number = number;
+    }
+
+    public String getPrice() {
+        return price;
+    }
+
+    public void setPrice(String price) {
+        this.price = price;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getImgurl() {
+        return imgurl;
+    }
+
+    public void setImgurl(String imgurl) {
+        this.imgurl = imgurl;
+    }
+
+    public String getDescribe() {
+        return describe;
+    }
+
+    public void setDescribe(String describe) {
+        this.describe = describe;
+    }
+
+    public String getCreattime() {
+        return creattime;
+    }
+
+    public void setCreattime(String creattime) {
+        this.creattime = creattime;
+    }
+
+    public String getUpdatetime() {
+        return updatetime;
+    }
+
+    public void setUpdatetime(String updatetime) {
+        this.updatetime = updatetime;
+    }
+
+    public boolean isdelete() {
+        return isdelete;
+    }
+
+    public void setIsdelete(boolean isdelete) {
+        this.isdelete = isdelete;
+    }
+
     public void delete(){
         this.isdelete = true;
         this.updatetime = new Date().toString();
     }
 
     public void update(int number, String price, String describe,String imgurl){
-
+        this.number = number;
+        this.price = price;
+        this.describe = describe;
+        this.imgurl = imgurl;
+        this.updatetime = new Date().toString();
     }
 
 }

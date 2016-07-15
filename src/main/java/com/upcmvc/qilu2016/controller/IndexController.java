@@ -19,6 +19,7 @@ import java.io.IOException;
  * Created by lenovo on 2016/5/30.
  */
 @RestController
+@RequestMapping("/123")
 public class IndexController {
 
     @Autowired
@@ -35,32 +36,23 @@ public class IndexController {
     根据 id 查找
      */
     @RequestMapping("/")
-    public Object showGoods(int id) {
-        return shopDao.findOne(id);
+    public Object showGoods(int userid) {
+        return shopDao.findByUserid(userid);
     }
 
 
-    @RequestMapping("/213/214")
-    public Object createGoods(int userid,String creattime, String title, int sellnumber, String connect, String updatetime, String master) {
+    @RequestMapping("/213")
+    public Object createGoods(int userid, String master, String title, String detail, String imgurl) {
 
-        Shop shop = new Shop( userid,master,title,sellnumber,connect,creattime,updatetime);
+        Shop shop = new Shop(userid,master,title,detail,imgurl);
         shopDao.save(shop);
         return new JsonMes(1, "创建店铺成功");
     }
 
-    @RequestMapping("/hkh/ghj")
-    public Object deleteGoods(@RequestParam(value = "id", defaultValue = "0") int id) {
-
+    @RequestMapping("/das")
+    public Object update(int id,String master,String title,String detail) {
         Shop shop = shopDao.findOne(id);
-        shop.delete();
-        shopDao.save(shop);
-        return new JsonMes(1, "删除店铺成功");
-    }
-
-    @RequestMapping("/das/das")
-    public Object update(int id, int sellnumber, String connect) {
-        Shop shop = shopDao.findOne(id);
-        shop.update(sellnumber, connect);
+        shop.update(master,title,detail);
         return new JsonMes(1, "更新店铺成功");
     }
 

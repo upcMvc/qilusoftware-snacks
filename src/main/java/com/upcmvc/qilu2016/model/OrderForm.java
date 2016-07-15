@@ -6,6 +6,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import java.util.Date;
 
 /**
  * 订单
@@ -23,10 +24,10 @@ public class OrderForm {
     private String updatetime;
     private boolean isdelete = false;
 
-    public OrderForm(int customerid, String creattime, String updatetime) {
+    public OrderForm(int customerid) {
         this.customerid = customerid;
-        this.creattime = creattime;
-        this.updatetime = updatetime;
+        this.creattime = new Date().toString();
+        this.updatetime = new Date().toString();
     }
 
     public OrderForm() {

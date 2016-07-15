@@ -23,8 +23,8 @@ public class GoodsController {
 
 
     @RequestMapping("/cgh")
-    public Object createGood(int number, double price, String name, String creattime, String updatetime) {
-        Goods goods = new Goods(number, price, name, creattime, updatetime);
+    public Object createGood(int shopid, int number, String price, String name, String imgurl, String describe) {
+        Goods goods = new Goods(shopid,number,price,name,imgurl,describe);
         goodsDao.save(goods);
         return new JsonMes(1, "创建成功");
     }
@@ -38,9 +38,9 @@ public class GoodsController {
     }
 
     @RequestMapping("/fds")
-    public Object updateGood(int shopid, String name, double price,String describe) {
-        Goods goods = (Goods) goodsDao.findByShopidAndName(shopid, name);
-        goods.update(shopid, price,describe);
+    public Object updateGood(int id,int number, String price, String describe,String imgurl) {
+       Goods goods = goodsDao.findOne(id);
+        goods.update(number,price,describe,imgurl);
         goodsDao.save(goods);
         return new JsonMes(1, "更新成功");
     }

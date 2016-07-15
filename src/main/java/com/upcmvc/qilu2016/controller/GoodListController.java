@@ -18,22 +18,19 @@ import org.springframework.web.bind.annotation.RestController;
 public class GoodListController {
 
     @Autowired
-    private GoodsDao goodsDao;
-
-    @Autowired
     private GoodListDao goodListDao;
 
 
     @RequestMapping("/lju")
-    public Object show(@RequestParam(value = "id", defaultValue = "0")int id) {
+    public Object show(int goodsid) {
 
-        return goodListDao.findOne(id);
+        return goodListDao.findByGoodsid(goodsid);
     }
 
     @RequestMapping("/456")
-    public Object createGoodList(int goodsid, int orderid, double price, int num, String name, String createtime, String updatetime) {
+    public Object createGoodList(int goodsid, int orderid, int num) {
 
-        GoodList goodList = new GoodList(goodsid, orderid, price, num, name,createtime, updatetime);
+        GoodList goodList = new GoodList(goodsid,orderid,num);
         goodListDao.save(goodList);
         return new JsonMes(1, "创建成功");
     }
@@ -47,9 +44,9 @@ public class GoodListController {
     }
 
     @RequestMapping("/123")
-    public Object update(@RequestParam(value = "id", defaultValue = "0")int id, int num, double price) {
+    public Object update(@RequestParam(value = "id", defaultValue = "0")int id, int num) {
         GoodList goodList = goodListDao.findOne(id);
-        goodList.update(num, price);
+        goodList.update(num);
         goodListDao.save(goodList);
         return new JsonMes(1, "更新成功");
     }
