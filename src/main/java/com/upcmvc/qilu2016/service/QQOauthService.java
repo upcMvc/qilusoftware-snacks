@@ -1,8 +1,8 @@
-package com.upcmvc.qilu2016.oauth.qq;
+package com.upcmvc.qilu2016.service;
 
 import com.google.gson.Gson;
 import com.upcmvc.qilu2016.config.Config;
-import com.upcmvc.qilu2016.dto.QQInfo;
+import com.upcmvc.qilu2016.dto.QQClientInfo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -10,7 +10,6 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
-import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLConnection;
 import java.net.URLEncoder;
@@ -19,7 +18,7 @@ import java.net.URLEncoder;
  * Created by Jaxlying on 2016/7/14.
  */
 @Service
-public class QQOauth {
+public class QQOauthService {
 
     private static final String grant_type = "authorization_code";
     private static final String gettokenurl = "https://graph.qq.com/oauth2.0/token";
@@ -70,12 +69,11 @@ public class QQOauth {
 
     }
 
-    public QQInfo getQQinfo(String message){
+    public QQClientInfo getQQinfo(String message){
         String str = message.substring(message.indexOf("callback( ") + "callback( ".length(),message.indexOf(" )"));
         Gson gson = new Gson();
         System.out.println(str);
-        return gson.fromJson(str,QQInfo.class);
-
+        return gson.fromJson(str,QQClientInfo.class);
     }
 
 

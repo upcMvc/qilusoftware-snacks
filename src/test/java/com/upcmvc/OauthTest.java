@@ -1,10 +1,8 @@
 package com.upcmvc;
 
 import com.upcmvc.qilu2016.Qilu2016Application;
-import com.upcmvc.qilu2016.oauth.qq.QQOauth;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.SpringApplicationConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.web.WebAppConfiguration;

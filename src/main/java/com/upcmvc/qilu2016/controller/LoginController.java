@@ -1,22 +1,17 @@
 package com.upcmvc.qilu2016.controller;
 
 import com.upcmvc.qilu2016.config.Config;
-import com.upcmvc.qilu2016.dto.QQInfo;
-import com.upcmvc.qilu2016.oauth.qq.QQOauth;
+import com.upcmvc.qilu2016.dao.UserDao;
+import com.upcmvc.qilu2016.dto.QQClientInfo;
+import com.upcmvc.qilu2016.service.LoginService;
+import com.upcmvc.qilu2016.service.QQOauthService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.io.BufferedReader;
 import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.net.URL;
-import java.net.URLConnection;
-import java.net.URLEncoder;
+
 
 /**
  * Created by Jaxlying on 2016/7/14.
@@ -28,16 +23,23 @@ public class LoginController {
     private Config config;
 
     @Autowired
-    private QQOauth qqOauth;
+    private QQOauthService qqOauthService;
 
-    private static final String gettokenurl = "https://graph.qq.com/oauth2.0/token";
+    @Autowired
+    private UserDao userDao;
 
-    @RequestMapping(value = "/",method = RequestMethod.GET,params = "code")
-    public String dealOauth(String code) throws IOException {
-        String token = qqOauth.getToken(qqOauth.getTokenAndRefresh(code));
-        String idstr = qqOauth.getOpenId(token);
-        QQInfo qqInfo = qqOauth.getQQinfo(idstr);
-        return "success";
+    @Autowired
+    private LoginService loginService;
+
+
+    @RequestMapping(value = "/",method = RequestMethod.GET,params = {"code","state=qq"})
+    public Object dealOauth(String code) throws IOException {
+        String token = qqOauthService.getToken(qqOauthService.getTokenAndRefresh(code));
+        String idstr = qqOauthService.getOpenId(token);
+        QQClientInfo qqClientInfo = qqOauthService.getQQinfo(idstr);
+        if(loginService.isOurUser(qqClientInfo.openid) == true)
+            return userDao.findByQqopenid(qqClientInfo.openid);
+        else
     }
 
 }

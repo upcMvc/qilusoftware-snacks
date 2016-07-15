@@ -19,6 +19,6 @@ qqoauth:
   appid: "101335412"
   appkey: "686864ec209fa7a4c2705dda5a6b6c9f"
   redirect: "mvc.y1code.cn"
-  state: "mvctest"
+  state: "qq"
 server:
   port: 80
