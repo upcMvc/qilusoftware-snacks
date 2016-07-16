@@ -10,6 +10,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @Controller
 public class ErrorController {
 
-    @RequestMapping("/error")
-    public String
+//    @RequestMapping("/error")
+//    public String
 }

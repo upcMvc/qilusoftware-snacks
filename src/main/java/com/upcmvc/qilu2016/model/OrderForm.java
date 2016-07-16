@@ -72,4 +72,9 @@ public class OrderForm {
     public void setIsdelete(boolean isdelete) {
         this.isdelete = isdelete;
     }
+
+    public void delete() {
+        this.isdelete = true;
+        this.updatetime = new Date().toString();
+    }
 }
