@@ -1,5 +1,6 @@
 package com.upcmvc.qilu2016.controller;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.upcmvc.qilu2016.dao.OrderFormDao;
 import com.upcmvc.qilu2016.dto.JsonMes;
 import com.upcmvc.qilu2016.model.OrderForm;
@@ -18,12 +19,13 @@ public class OrderFormController {
     @Autowired
     private OrderFormDao orderFormDao;
 
-    @RequestMapping("/dasd")
+    @RequestMapping("/show")
     public Object showOrderForm(int customerid)
     {
         return orderFormDao.findByCustomerid(customerid);
     }
-    @RequestMapping("/784")
+    @RequestMapping("/create")
+    @JsonIgnore
     public Object createOrderForm(int customerid)
     {
         OrderForm orderForm = new OrderForm(customerid);

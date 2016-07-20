@@ -1,5 +1,7 @@
 package com.upcmvc.qilu2016.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 import javax.persistence.*;
 import java.util.Date;
 /**
@@ -7,6 +9,7 @@ import java.util.Date;
  * Created by lenovo on 2016/5/30.
  */
 @Entity
+@JsonIgnoreProperties(value = {"creattime" ,"updatetime","isdelete"})
 @Table(name = "goodlist")
 public class GoodList {
     @Id

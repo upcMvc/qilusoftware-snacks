@@ -1,5 +1,7 @@
 package com.upcmvc.qilu2016.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -10,6 +12,7 @@ import java.util.Date;
  * Created by lenovo on 2016/5/30.
  */
 @Entity
+@JsonIgnoreProperties(value = {"creattime" ,"updatetime","isdelete"})
 public class Goods {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)

@@ -1,5 +1,6 @@
 package com.upcmvc.qilu2016.controller;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.upcmvc.qilu2016.dao.GoodListDao;
 import com.upcmvc.qilu2016.dao.GoodsDao;
 import com.upcmvc.qilu2016.dto.JsonMes;
@@ -15,19 +16,22 @@ import org.springframework.web.bind.annotation.RestController;
  * Created by 陈子枫 on 2016/7/13.
  */
 @RestController
+@RequestMapping("/goodlist")
 public class GoodListController {
 
     @Autowired
     private GoodListDao goodListDao;
 
 
-    @RequestMapping("/lju")
+    @RequestMapping("/show")
+    @JsonIgnore
     public Object show(int goodsid) {
 
         return goodListDao.findByGoodsid(goodsid);
     }
 
-    @RequestMapping("/456")
+    @RequestMapping("/create")
+    @JsonIgnore
     public Object createGoodList(int goodsid, int orderid, int num) {
 
         GoodList goodList = new GoodList(goodsid,orderid,num);
@@ -35,7 +39,8 @@ public class GoodListController {
         return new JsonMes(1, "创建成功");
     }
 
-    @RequestMapping("/789")
+    @RequestMapping("/delete")
+    @JsonIgnore
     public Object delete(@RequestParam(value = "id", defaultValue = "0") int id) {
         GoodList goodList = goodListDao.findOne(id);
         goodList.delete();
@@ -43,7 +48,8 @@ public class GoodListController {
         return new JsonMes(1, "删除成功");
     }
 
-    @RequestMapping("/123")
+    @RequestMapping("/update")
+    @JsonIgnore
     public Object update(@RequestParam(value = "id", defaultValue = "0")int id, int num) {
         GoodList goodList = goodListDao.findOne(id);
         goodList.update(num);

@@ -1,7 +1,8 @@
 package com.upcmvc.qilu2016.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 import javax.persistence.*;
-import javax.xml.crypto.Data;
 import java.util.Date;
 
 /**
@@ -9,6 +10,7 @@ import java.util.Date;
  */
 @Entity
 @Table(name = "shopship")
+@JsonIgnoreProperties(value = {"creattime" ,"updatetime","isdelete"})
 public class Shop {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -19,6 +21,9 @@ public class Shop {
     private String title;//店名
     private String detail;//详细介绍
     private String imgurl;
+    private String phone;
+    private String email;
+    private String qq;
 
     private String creattime;
     private String updatetime;
@@ -27,12 +32,15 @@ public class Shop {
     public Shop(){
     }
 
-    public Shop(int userid, String master, String title, String detail, String imgurl) {
+    public Shop(int userid, String master, String title, String detail, String imgurl, String phone, String email, String qq) {
         this.userid = userid;
         this.master = master;
         this.title = title;
         this.detail = detail;
         this.imgurl = imgurl;
+        this.phone = phone;
+        this.email = email;
+        this.qq = qq;
         this.creattime = new Date().toString();
         this.updatetime = new Date().toString();
     }
@@ -77,6 +85,38 @@ public class Shop {
         this.detail = detail;
     }
 
+    public String getImgurl() {
+        return imgurl;
+    }
+
+    public void setImgurl(String imgurl) {
+        this.imgurl = imgurl;
+    }
+
+    public String getPhone() {
+        return phone;
+    }
+
+    public void setPhone(String phone) {
+        this.phone = phone;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public String getqq() {
+        return qq;
+    }
+
+    public void setqq(String qq) {
+        this.qq = qq;
+    }
+
     public String getCreattime() {
         return creattime;
     }
@@ -99,14 +139,6 @@ public class Shop {
 
     public void setIsdelete(boolean isdelete) {
         this.isdelete = isdelete;
-    }
-
-    public String getImgurl() {
-        return imgurl;
-    }
-
-    public void setImgurl(String imgurl) {
-        this.imgurl = imgurl;
     }
 
     public void update(String master, String title, String detail){
