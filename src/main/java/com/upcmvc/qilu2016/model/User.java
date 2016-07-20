@@ -1,8 +1,6 @@
 package com.upcmvc.qilu2016.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import com.fasterxml.jackson.annotation.JsonView;
-import org.springframework.beans.factory.annotation.Autowired;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -14,7 +12,7 @@ import java.util.Date;
  * Created by lenovo on 2016/5/30.
  */
 @Entity
-@JsonIgnoreProperties(value = {"password"})
+@JsonIgnoreProperties(value = {"password","creattime","updatetime","isdelete"})
 public class User {
 
     @Id

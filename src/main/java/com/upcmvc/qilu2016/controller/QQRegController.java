@@ -1,7 +1,6 @@
 package com.upcmvc.qilu2016.controller;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonView;
 import com.upcmvc.qilu2016.config.Config;
 import com.upcmvc.qilu2016.dao.UserDao;
 import com.upcmvc.qilu2016.dto.QQClientInfo;
@@ -21,7 +20,7 @@ import java.io.IOException;
  * Created by Jaxlying on 2016/7/14.
  */
 @RestController
-public class LoginController {
+public class QQRegController {
 
     @Autowired
     private Config config;
@@ -52,6 +51,16 @@ public class LoginController {
         }
         else
             return qqOauthService.getQQInfor(token,qqClientInfo.openid);
+    }
+
+    @RequestMapping(value = "/regist",params = "state=qq")
+    @JsonIgnore
+    public Object regist(String nickname,String figureurl_qq_1,String openid,String phone){
+        User user = new User(openid,nickname,phone,figureurl_qq_1);
+        userDao.save(user);
+        User newuser = userDao.findTopByOrderByCreattimeDesc();
+        httpSession.setAttribute("user",newuser);
+        return newuser;
     }
 
 }
