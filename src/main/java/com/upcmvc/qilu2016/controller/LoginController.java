@@ -2,7 +2,7 @@ package com.upcmvc.qilu2016.controller;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonView;
-import com.upcmvc.qilu2016.Config.Config;
+import com.upcmvc.qilu2016.config.Config;
 import com.upcmvc.qilu2016.dao.UserDao;
 import com.upcmvc.qilu2016.dto.QQClientInfo;
 import com.upcmvc.qilu2016.model.User;
@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+import javax.servlet.http.HttpSession;
 import java.io.IOException;
 
 
@@ -34,6 +35,9 @@ public class LoginController {
     @Autowired
     private LoginService loginService;
 
+    @Autowired
+    private HttpSession httpSession;
+
 
     @RequestMapping(value = "/",method = RequestMethod.GET,params = {"code","state=qq"})
     @JsonIgnore
@@ -41,8 +45,11 @@ public class LoginController {
         String token = qqOauthService.getToken(qqOauthService.getTokenAndRefresh(code));
         String idstr = qqOauthService.getOpenId(token);
         QQClientInfo qqClientInfo = qqOauthService.getQQclientinfo(idstr);
-        if(loginService.isOurUser(qqClientInfo.openid) == true)
-            return userDao.findByQqopenid(qqClientInfo.openid);
+        if(loginService.isOurUser(qqClientInfo.openid) == true){
+            User user = userDao.findByQqopenid(qqClientInfo.openid);
+            httpSession.setAttribute("user",user);
+            return user;
+        }
         else
             return qqOauthService.getQQInfor(token,qqClientInfo.openid);
     }
