@@ -7,6 +7,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import javax.servlet.http.HttpSession;
+
 /**
  * Created by Jaxlying on 2016/7/15.
  */
@@ -16,11 +18,16 @@ public class RegistController {
     @Autowired
     private UserDao userDao;
 
+    @Autowired
+    private HttpSession httpSession;
+
     @RequestMapping(value = "/regist",params = "state=qq")
     @JsonIgnore
     public Object regist(String nickname,String figureurl_qq_1,String openid,String phone){
         User user = new User(openid,nickname,phone,figureurl_qq_1);
         userDao.save(user);
-        return userDao.findTopByOrderByCreattimeDesc();
+        User newuser = userDao.findTopByOrderByCreattimeDesc();
+        httpSession.setAttribute("user",newuser);
+        return newuser;
     }
 }
