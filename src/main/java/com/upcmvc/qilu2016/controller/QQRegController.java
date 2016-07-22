@@ -1,10 +1,6 @@
 package com.upcmvc.qilu2016.controller;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-<<<<<<< HEAD:src/main/java/com/upcmvc/qilu2016/controller/LoginController.java
-import com.fasterxml.jackson.annotation.JsonView;
-=======
->>>>>>> 43a25d82f6fc0268b80bc1017fe7ccebb04c8fa7:src/main/java/com/upcmvc/qilu2016/controller/QQRegController.java
 import com.upcmvc.qilu2016.config.Config;
 import com.upcmvc.qilu2016.dao.UserDao;
 import com.upcmvc.qilu2016.dto.QQClientInfo;
