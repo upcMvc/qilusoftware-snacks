@@ -23,6 +23,18 @@ public class User {
 
     private String username;
     private String password;
+    private String mail;
+
+    public String getMail() {
+        return mail;
+    }
+
+    public void setMail(String mail) {
+        this.mail = mail;
+    }
+
+    private int status = 0;//是否为激活状态
+
     private boolean ismaster;
     private int sellerid;
     private String phone;
@@ -32,6 +44,17 @@ public class User {
     private String updatetime;
     private boolean isdelete = false;
 
+    public User() {
+    } //空的构造函数
+
+    public User(String username,String mail,String password){
+        this.username = username;
+        this.password = password;
+        this.mail = mail;
+        this.imgurl = "http://g.hiphotos.baidu.com/zhidao/wh%3D450%2C600/sign=ef849d229e22720e7b9beafe4efb2670/79f0f736afc37931ec26be69edc4b74543a91127.jpg";
+        this.creattime = new Date().toString();
+        this.updatetime = new Date().toString();
+    }
     public User(String qqopenid, String username, String phone, String imgurl) {
         this.qqopenid = qqopenid;
         this.username = username;
@@ -131,6 +154,11 @@ public class User {
         this.isdelete = isdelete;
     }
 
-    public User() {
-    } //空的构造函数
+    public int getStatus() {
+        return status;
+    }
+
+    public void setStatus(int status) {
+        this.status = status;
+    }
 }

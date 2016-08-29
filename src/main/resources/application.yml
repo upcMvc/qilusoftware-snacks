@@ -21,4 +21,4 @@ qqoauth:
   redirect: "mvc.y1code.cn"
   state: "qq"
 server:
-  port: 80
+  port: 8080

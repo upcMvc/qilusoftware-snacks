@@ -9,4 +9,6 @@ import org.springframework.data.repository.CrudRepository;
 public interface UserDao extends CrudRepository<User,Integer> {
         User findByQqopenid(String qqopenid);
         User findTopByOrderByCreattimeDesc();
+        User findByMail(String mail);
+        User findByUsername(String username);
 }
