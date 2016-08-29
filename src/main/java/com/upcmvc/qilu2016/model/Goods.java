@@ -2,17 +2,15 @@ package com.upcmvc.qilu2016.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 import java.util.Date;
 
 /**
  * Created by lenovo on 2016/5/30.
  */
 @Entity
-@JsonIgnoreProperties(value = {"creattime" ,"updatetime","isdelete"})
+@Table(name = "goods")
+@JsonIgnoreProperties(value = {"creattime", "updatetime", "isdelete"})
 public class Goods {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -39,6 +37,9 @@ public class Goods {
         this.describe = describe;
         this.creattime = new Date().toString();
         this.updatetime = new Date().toString();
+    }
+
+    public Goods() {
     }
 
     public int getId() {
@@ -121,12 +122,12 @@ public class Goods {
         this.isdelete = isdelete;
     }
 
-    public void delete(){
+    public void delete() {
         this.isdelete = true;
         this.updatetime = new Date().toString();
     }
 
-    public void update(int number, String price, String describe,String imgurl){
+    public void update(int number, String price, String describe, String imgurl) {
         this.number = number;
         this.price = price;
         this.describe = describe;

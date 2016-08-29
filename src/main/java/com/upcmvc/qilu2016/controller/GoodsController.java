@@ -30,7 +30,7 @@ public class GoodsController {
     @RequestMapping("/create")
     @JsonIgnore
     public Object createGood(int shopid, int number, String price, String name, String imgurl, String describe) {
-        Goods goods = new Goods(shopid,number,price,name,imgurl,describe);
+        Goods goods = new Goods(shopid, number, price, name, imgurl, describe);
         goodsDao.save(goods);
         return new JsonMes(1, "创建成功");
     }
@@ -46,18 +46,36 @@ public class GoodsController {
 
     @RequestMapping("/update")
     @JsonIgnore
-    public Object updateGood(int id,int number, String price, String describe,String imgurl) {
-       Goods goods = goodsDao.findOne(id);
-        goods.update(number,price,describe,imgurl);
+    public Object updateGood(int id, int number, String price, String describe, String imgurl) {
+        Goods goods = goodsDao.findOne(id);
+        goods.update(number, price, describe, imgurl);
         goodsDao.save(goods);
         return new JsonMes(1, "更新成功");
     }
 
-    @RequestMapping(value = "/show",method = RequestMethod.GET )
+    @RequestMapping(value = "/show", method = RequestMethod.GET)
     @JsonIgnore
-    public Object showGoods(int id ){
+    public Object showGoods(int id) {
 
         return goodsDao.findOne(id);
+    }
+
+    @RequestMapping("/test")
+    public Object test(){
+        for (int i=1;i<=10;i++)
+        {
+            int shopid = i;
+            int number = i;
+            System.out.println(shopid);
+            String price = "123";
+            String name = "456";
+            String imgurl ="htchengzifeng";
+            String describe = "chengzifengshigesb";
+            Goods goods = new Goods(shopid,number,price,name,imgurl,describe);
+            goodsDao.save(goods);
+
+        }
+        return new JsonMes(1, "charu");
     }
 
 
