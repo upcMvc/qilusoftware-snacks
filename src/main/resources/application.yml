@@ -22,3 +22,4 @@ qqoauth:
   state: "qq"
 server:
   port: 8080
+serveraddress: http://localhost:8080

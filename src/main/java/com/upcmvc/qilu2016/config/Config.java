@@ -29,4 +29,7 @@ public class Config {
     @Value("${qqoauth.state}")
     public String state ;
 
+    @Value("${serveraddress}")
+    public String serveraddress;
+
 }

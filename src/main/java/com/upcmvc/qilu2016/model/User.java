@@ -12,7 +12,7 @@ import java.util.Date;
  * Created by lenovo on 2016/5/30.
  */
 @Entity
-@JsonIgnoreProperties(value = {"password","creattime","updatetime","isdelete"})
+@JsonIgnoreProperties(value = {"password","creattime","updatetime","delete"})
 public class User {
 
     @Id
