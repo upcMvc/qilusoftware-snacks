@@ -1,6 +1,9 @@
 package com.upcmvc.qilu2016.controller;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.upcmvc.qilu2016.config.Config;
 import com.upcmvc.qilu2016.dao.UserDao;
+import com.upcmvc.qilu2016.dto.JsonMes;
 import com.upcmvc.qilu2016.model.User;
 import com.upcmvc.qilu2016.util.MailUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,6 +12,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.RestController;
 
 import javax.servlet.http.HttpSession;
 import java.io.UnsupportedEncodingException;
@@ -19,7 +23,7 @@ import java.util.Map;
 /**
  * Created by Jaxlying on 2016/8/29.
  */
-@Controller
+@RestController
 @RequestMapping("/user")
 public class UserController {
 
@@ -29,28 +33,36 @@ public class UserController {
     @Autowired
     private UserDao userDao;
 
+    @Autowired
+    private Config config;
+
     private static final double MODULUS = 2.56;//验证码计算系数
 
     @RequestMapping("/user_info")
-    public User getUserInfo(String mail){
+    @JsonIgnore
+    public Object getUserInfo(String mail){
         User user = null;
+        System.out.println("查找用户");
         try {
             user = userDao.findByMail(mail);
         }catch (Exception ex){
             ex.printStackTrace();
         }
+        System.out.println(user.getId());
         return user;
     }
 
     @RequestMapping(value = "/login",method = RequestMethod.POST)
-    public String doLogin(String username, String password){
-        User user = userDao.findByMail(username);
+    @JsonIgnore
+    public Object doLogin(String username, String password){
+        User user = userDao.findByUsername(username);
+        System.out.println("用户登录");
         BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
         if (passwordEncoder.matches(password,user.getPassword())){
             httpSession.setAttribute("user",user);
-            return "success";
+            return user;
         }else {
-            return "failed";
+            return new JsonMes(-1,"用户名或密码错误");
         }
     }
 
@@ -59,8 +71,7 @@ public class UserController {
      * 验证邮件回执处理
      */
     @RequestMapping(value = "/validate", method = RequestMethod.GET)
-    @ResponseBody
-    public String validate(String name, Double validateCode, Date sendDate) throws UnsupportedEncodingException {
+    public Object validate(String name, Double validateCode, Date sendDate) throws UnsupportedEncodingException {
         System.out.println("用户名 is " + name);
         Date currentDate = new Date();
         long timeSpan = currentDate.getTime() - sendDate.getTime();
@@ -74,9 +85,9 @@ public class UserController {
             if (user != null) {
                 user.setStatus(1);
                 userDao.save(user);
-                return "验证成功";
+                return new JsonMes(1,"验证成功");
             } else {
-                return "验证失败  没有此用户 请重新注册";
+                return new JsonMes(-1,"验证失败  没有此用户 请重新注册");
             }
         }
 
@@ -92,7 +103,7 @@ public class UserController {
         User user = null;
         BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
         Map<String, Object> userInfo = new HashMap<>();
-        if (userDao.findByUsername(name) == null) {
+        if (userDao.findByUsername(name) == null&&userDao.findByMail(mail) == null) {
             try {
                 user = new User(name, mail, passwordEncoder.encode(password));
                 userDao.save(user);
@@ -114,7 +125,7 @@ public class UserController {
                 sb.append(validateCode);
                 sb.append("&sendDate=");
                 sb.append(new Date());
-                sb.append("\">http://localhost:8080/validate?&mail=");
+                sb.append("\">" + config.serveraddress + "/validate?&mail=");
                 sb.append(name);
                 sb.append("&validateCode=");
                 sb.append(validateCode);
@@ -142,24 +153,23 @@ public class UserController {
     /**
      * 发送重置密码邮件
      */
-    @RequestMapping(value = "/reset_mail",method = RequestMethod.POST)
-    @ResponseBody
-    public boolean create(String mail) {
+    @RequestMapping(value = "/reset_mail")
+    public Object reset(String mail) {
         System.out.println("mail " + mail);
         BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
         if (userDao.findByMail(mail) != null) {
             try {
 
                 ///邮件的内容
-                StringBuffer sb = new StringBuffer("点击下面链接激活账号，48小时生效，否则重新注册账号，链接只能使用一次，请尽快激活！</br>");
-                sb.append("<a href=\"http://localhost:8080/reset_pager?&mail=");
+                StringBuffer sb = new StringBuffer("点击下面链接进行密码重置，48小时内生效，链接只能使用一次，请尽快重置！</br>");
+                sb.append("<a href=\"" + config.serveraddress +"/reset_pager?&mail=");
                 sb.append(mail);
                 sb.append("&validateCode=");
                 Double validateCode = mail.length() * MODULUS;
                 sb.append(validateCode);
                 sb.append("&sendDate=");
                 sb.append(new Date());
-                sb.append("\">http://localhost:8080/reset_pager?&mail=");
+                sb.append("\">" + config.serveraddress + "/reset_pager?&mail=");
                 sb.append(mail);
                 sb.append("&validateCode=");
                 sb.append(validateCode);
@@ -170,13 +180,13 @@ public class UserController {
                 //发送邮件
                 MailUtils.send(mail, sb.toString());
                 System.out.println("发送邮件");
-                return true;
+                return new JsonMes(1,"重置密码邮件发送成功");
             } catch (Exception ex) {
                 ex.printStackTrace();
-                return false;
+                return new JsonMes(-1,"未知错误");
             }
         } else {
-            return false;
+            return new JsonMes(-1,"未知错误");
         }
 
     }

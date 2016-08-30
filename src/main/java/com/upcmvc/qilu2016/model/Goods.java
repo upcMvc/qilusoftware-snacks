@@ -10,7 +10,7 @@ import java.util.Date;
  */
 @Entity
 @Table(name = "goods")
-@JsonIgnoreProperties(value = {"creattime", "updatetime", "isdelete"})
+@JsonIgnoreProperties(value = {"creattime", "updatetime", "delete"})
 public class Goods {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)

@@ -14,7 +14,7 @@ import java.util.Date;
  * Created by lenovo on 2016/5/30.
  */
 @Entity
-@JsonIgnoreProperties(value = {"creattime" ,"updatetime","isdelete"})
+@JsonIgnoreProperties(value = {"creattime" ,"updatetime","delete"})
 public class OrderForm {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)

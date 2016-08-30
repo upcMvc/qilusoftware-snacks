@@ -9,7 +9,7 @@ import java.util.Date;
  * Created by lenovo on 2016/5/30.
  */
 @Entity
-@JsonIgnoreProperties(value = {"creattime" ,"updatetime","isdelete"})
+@JsonIgnoreProperties(value = {"creattime" ,"updatetime","delete"})
 @Table(name = "goodlist")
 public class GoodList {
     @Id
