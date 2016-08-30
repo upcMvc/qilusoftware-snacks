@@ -37,7 +37,7 @@ public class IndexController {
      */
     @RequestMapping("/show" )
     @JsonIgnore
-    public Object showGoods(int userid) {
+    public Object showGoods(@RequestParam(value = "userid", defaultValue = "0")int userid) {
         User user = (User)(httpSession.getAttribute("user"));
         if(user.ismaster())
         {
@@ -48,7 +48,7 @@ public class IndexController {
 
 
     @RequestMapping("/create")
-    public Object createGoods(int userid, String master, String title, String detail, String imgurl, String email, String qq) {
+    public Object createGoods(@RequestParam(value = "userid", defaultValue = "0")int userid, String master, String title, String detail, String imgurl, String email, String qq) {
         User user = (User)(httpSession.getAttribute("user"));
         String phone = user.getPhone();
         Shop shop = new Shop(userid,master,title,detail,imgurl,phone,email,qq);
@@ -58,7 +58,7 @@ public class IndexController {
 
     @RequestMapping("/updata")
     @JsonIgnore
-    public Object update(int id,String master,String title,String detail) {
+    public Object update(@RequestParam(value = "id", defaultValue = "0")int id,String master,String title,String detail) {
         Shop shop = shopDao.findOne(id);
         shop.update(master,title,detail);
         return new JsonMes(1, "更新店铺成功");

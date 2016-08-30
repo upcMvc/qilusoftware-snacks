@@ -25,14 +25,14 @@ public class GoodListController {
 
     @RequestMapping("/show")
     @JsonIgnore
-    public Object show(int goodsid) {
+    public Object show(@RequestParam(value = "goodsid", defaultValue = "0")int goodsid) {
 
         return goodListDao.findByGoodsid(goodsid);
     }
 
     @RequestMapping("/create")
     @JsonIgnore
-    public Object createGoodList(int goodsid, int orderid, int num) {
+    public Object createGoodList(@RequestParam(value = "goodsid", defaultValue = "0")int goodsid,@RequestParam(value = "orderid", defaultValue = "0") int orderid, @RequestParam(value = "num", defaultValue = "0")int num) {
 
         GoodList goodList = new GoodList(goodsid,orderid,num);
         goodListDao.save(goodList);
@@ -50,11 +50,23 @@ public class GoodListController {
 
     @RequestMapping("/update")
     @JsonIgnore
-    public Object update(@RequestParam(value = "id", defaultValue = "0")int id, int num) {
+    public Object update(@RequestParam(value = "id", defaultValue = "0")int id, @RequestParam(value = "num", defaultValue = "0")int num) {
         GoodList goodList = goodListDao.findOne(id);
         goodList.update(num);
         goodListDao.save(goodList);
         return new JsonMes(1, "更新成功");
     }
+    @RequestMapping("/test")
+    public Object test(){
 
+        for(int i = 1;i<10;i++)
+        {
+            int goodsid = i;
+            int orderid = i;
+            int num = i + 5;
+            GoodList goodList = new GoodList(goodsid,orderid,num);
+            goodListDao.save(goodList);
+        }
+        return new JsonMes(1,"OK");
+    }
 }

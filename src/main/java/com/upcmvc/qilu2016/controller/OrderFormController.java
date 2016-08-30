@@ -20,13 +20,13 @@ public class OrderFormController {
     private OrderFormDao orderFormDao;
 
     @RequestMapping("/show")
-    public Object showOrderForm(int customerid)
+    public Object showOrderForm(@RequestParam(value = "customerid", defaultValue = "0")int customerid)
     {
         return orderFormDao.findByCustomerid(customerid);
     }
     @RequestMapping("/create")
     @JsonIgnore
-    public Object createOrderForm(int customerid)
+    public Object createOrderForm(@RequestParam(value = "customerid", defaultValue = "0")int customerid)
     {
         OrderForm orderForm = new OrderForm(customerid);
         orderFormDao.save(orderForm);

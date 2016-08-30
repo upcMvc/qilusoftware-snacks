@@ -28,15 +28,14 @@ public class GoodsController {
 
 
     @RequestMapping("/create")
-    @JsonIgnore
-    public Object createGood(int shopid, int number, String price, String name, String imgurl, String describe) {
-        Goods goods = new Goods(shopid, number, price, name, imgurl, describe);
+    public Object createGood(String price, String name, String imgurl, String detail, @RequestParam(value = "shopid", defaultValue = "0") int shopid, @RequestParam(value = "number", defaultValue = "0") int number) {
+        //  System.out.println(price + imgurl + shopid);
+        Goods goods = new Goods(shopid, number, price, name, imgurl, detail);
         goodsDao.save(goods);
         return new JsonMes(1, "创建成功");
     }
 
     @RequestMapping("/delete")
-    @JsonIgnore
     public Object deleteGood(@RequestParam(value = "id", defaultValue = "0") int id) {
         Goods goods = goodsDao.findOne(id);
         goods.delete();
@@ -46,37 +45,35 @@ public class GoodsController {
 
     @RequestMapping("/update")
     @JsonIgnore
-    public Object updateGood(int id, int number, String price, String describe, String imgurl) {
+    public Object updateGood(@RequestParam(value = "id", defaultValue = "1") int id, @RequestParam(value = "number", defaultValue = "0") int number, String price, String detail, String imgurl) {
         Goods goods = goodsDao.findOne(id);
-        goods.update(number, price, describe, imgurl);
+        goods.update(number, price, detail, imgurl);
         goodsDao.save(goods);
         return new JsonMes(1, "更新成功");
     }
 
     @RequestMapping(value = "/show", method = RequestMethod.GET)
     @JsonIgnore
-    public Object showGoods(int id) {
+    public Object showGoods(@RequestParam(value = "id", defaultValue = "0") int id) {
 
         return goodsDao.findOne(id);
     }
 
     @RequestMapping("/test")
-    public Object test(){
-        for (int i=1;i<=10;i++)
-        {
+    public Object test() {
+        for (int i = 1; i <= 10; i++) {
             int shopid = i;
             int number = i;
             System.out.println(shopid);
             String price = "123";
             String name = "456";
-            String imgurl ="htchengzifeng";
-            String describe = "chengzifengshigesb";
-            Goods goods = new Goods(shopid,number,price,name,imgurl,describe);
+            String imgurl = "wanghaojun";
+            String detail = "chengzifeng";
+            Goods goods = new Goods(shopid, number, price, name, imgurl, detail);
             goodsDao.save(goods);
 
         }
         return new JsonMes(1, "charu");
     }
-
 
 }

@@ -31,7 +31,7 @@ public class GoodList {
         this.creattime = new Date().toString();
         this.updatetime = new Date().toString();
     }
-
+    public GoodList(){}
     public int getId() {
         return id;
     }
