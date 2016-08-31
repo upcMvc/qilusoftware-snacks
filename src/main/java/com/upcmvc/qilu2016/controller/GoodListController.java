@@ -32,9 +32,10 @@ public class GoodListController {
 
     @RequestMapping("/create")
     @JsonIgnore
-    public Object createGoodList(@RequestParam(value = "goodsid", defaultValue = "0")int goodsid,@RequestParam(value = "orderid", defaultValue = "0") int orderid, @RequestParam(value = "num", defaultValue = "0")int num) {
+    public Object createGoodList(@RequestParam(value = "goodsid", defaultValue = "0")int goodsid,@RequestParam(value = "orderid", defaultValue = "0") int orderid, @RequestParam(value = "num", defaultValue = "0")int num
+    ,String name,float price) {
 
-        GoodList goodList = new GoodList(goodsid,orderid,num);
+        GoodList goodList = new GoodList(goodsid,orderid,num,name,price);
         goodListDao.save(goodList);
         return new JsonMes(1, "创建成功");
     }
@@ -50,9 +51,9 @@ public class GoodListController {
 
     @RequestMapping("/update")
     @JsonIgnore
-    public Object update(@RequestParam(value = "id", defaultValue = "0")int id, @RequestParam(value = "num", defaultValue = "0")int num) {
+    public Object update(@RequestParam(value = "id", defaultValue = "0")int id, @RequestParam(value = "num", defaultValue = "0")int num,String name ,float price) {
         GoodList goodList = goodListDao.findOne(id);
-        goodList.update(num);
+        goodList.update(num,name,price);
         goodListDao.save(goodList);
         return new JsonMes(1, "更新成功");
     }
@@ -64,7 +65,9 @@ public class GoodListController {
             int goodsid = i;
             int orderid = i;
             int num = i + 5;
-            GoodList goodList = new GoodList(goodsid,orderid,num);
+            String name = "latiao";
+            float price = 3;
+            GoodList goodList = new GoodList(goodsid,orderid,num,name,price);
             goodListDao.save(goodList);
         }
         return new JsonMes(1,"OK");
