@@ -118,7 +118,7 @@ public class UserController {
 
                 ///邮件的内容
                 StringBuffer sb = new StringBuffer("点击下面链接激活账号，48小时有效，否则重新注册账号，链接只能使用一次，请尽快激活 ！</br>");
-                sb.append("<a href=\"http://localhost:8080/user/validate?&name=");
+                sb.append("<a href=\"" + config.serveraddress +"/user/validate?&name=");
                 sb.append(name);
                 sb.append("&validateCode=");
                 Double validateCode = name.length() * MODULUS;
@@ -143,7 +143,7 @@ public class UserController {
                 return userInfo;
             }
         } else {
-            userInfo.put("result", "用户已存在");
+            userInfo.put("result", "用户名或邮箱已存在");
             return userInfo;
         }
 
