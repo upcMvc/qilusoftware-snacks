@@ -21,20 +21,20 @@ public class Goods {
     private String price;
     private String name;
     private String imgurl;
-    private String describe;
+    private String detail;
 
     private String creattime;
     private String updatetime;
     private boolean isdelete = false;
 
 
-    public Goods(int shopid, int number, String price, String name, String imgurl, String describe) {
+    public Goods(int shopid, int number, String price, String name, String imgurl, String detail) {
         this.shopid = shopid;
         this.number = number;
         this.price = price;
         this.name = name;
         this.imgurl = imgurl;
-        this.describe = describe;
+        this.detail = detail;
         this.creattime = new Date().toString();
         this.updatetime = new Date().toString();
     }
@@ -90,12 +90,12 @@ public class Goods {
         this.imgurl = imgurl;
     }
 
-    public String getDescribe() {
-        return describe;
+    public String getDetail() {
+        return detail;
     }
 
-    public void setDescribe(String describe) {
-        this.describe = describe;
+    public void setDetail(String detail) {
+        this.detail = detail;
     }
 
     public String getCreattime() {
@@ -127,10 +127,10 @@ public class Goods {
         this.updatetime = new Date().toString();
     }
 
-    public void update(int number, String price, String describe, String imgurl) {
+    public void update(int number, String price, String detail, String imgurl) {
         this.number = number;
         this.price = price;
-        this.describe = describe;
+        this.detail = detail;
         this.imgurl = imgurl;
         this.updatetime = new Date().toString();
     }
