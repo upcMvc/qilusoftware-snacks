@@ -8,4 +8,6 @@ import org.springframework.data.repository.CrudRepository;
  */
 public interface GoodListDao extends CrudRepository<GoodList,Integer> {
     public GoodList findByGoodsid(int goodsid);
+    public Iterable<GoodList> findByIspay(boolean ispay);
+    public Iterable<GoodList> findAll();
 }

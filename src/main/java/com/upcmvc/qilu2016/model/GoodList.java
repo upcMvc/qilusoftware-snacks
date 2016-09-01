@@ -21,6 +21,7 @@ public class GoodList {
     private int num;
     private String name;
     private float price;
+    private boolean ispay = false;
 
     private String creattime;
     private String updatetime;
@@ -40,6 +41,16 @@ public class GoodList {
         this.num = num;
         this.name = name;
         this.price = price;
+        this.creattime = new Date().toString();
+        this.updatetime = new Date().toString();
+    }
+    public GoodList(int goodsid, int orderid, int num, String name, float price,boolean ispay){
+        this.goodsid = goodsid;
+        this.orderid = orderid;
+        this.num = num;
+        this.name = name;
+        this.price = price;
+        this.ispay = ispay;
         this.creattime = new Date().toString();
         this.updatetime = new Date().toString();
     }
@@ -117,6 +128,14 @@ public class GoodList {
         this.price = price;
     }
 
+    public boolean ispay() {
+        return ispay;
+    }
+
+    public void setIspay(boolean ispay) {
+        this.ispay = ispay;
+    }
+
     public void delete(){
         this.isdelete = true;
         this.updatetime = new Date().toString();
@@ -133,5 +152,9 @@ public class GoodList {
         this.updatetime = new Date().toString();
     }
 
+    public boolean ispay(boolean ispay){
+        ispay = true;
+        return ispay;
+    }
 }
 

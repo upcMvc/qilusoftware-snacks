@@ -38,8 +38,8 @@ public class Shop {
         this.title = title;
         this.detail = detail;
         this.imgurl = imgurl;
-        this.phone = phone;
         this.email = email;
+        this.phone = phone;
         this.qq = qq;
         this.creattime = new Date().toString();
         this.updatetime = new Date().toString();

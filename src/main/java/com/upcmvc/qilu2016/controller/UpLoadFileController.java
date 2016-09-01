@@ -23,6 +23,7 @@ import static org.springframework.hateoas.mvc.ControllerLinkBuilder.methodOn;
  * Created by wanghaojun on 2016/7/15.
  */
 @Controller
+
 public class UpLoadFileController {
     private static final Logger log = LoggerFactory.getLogger(UpLoadFileController.class);
 

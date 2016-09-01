@@ -16,6 +16,7 @@ import javax.servlet.http.HttpSession;
 
 /**
  * Created by 陈子枫 on 2016/7/11.
+ * 个人商店
  */
 @RestController
 @RequestMapping("/goods")

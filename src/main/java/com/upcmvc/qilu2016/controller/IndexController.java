@@ -17,6 +17,7 @@ import java.io.IOException;
 
 /**
  * Created by lenovo on 2016/5/30.
+ * 主页
  */
 @RestController
 @RequestMapping("/shop")
@@ -33,34 +34,35 @@ public class IndexController {
 
 
     /*
-    根据 id 查找
+    根据 userid 查找用户信息
      */
-    @RequestMapping("/show" )
+    @RequestMapping("/show")
     @JsonIgnore
-    public Object showGoods(@RequestParam(value = "userid", defaultValue = "0")int userid) {
-        User user = (User)(httpSession.getAttribute("user"));
-        if(user.ismaster())
-        {
-
-        }
+    public Object showGoods(@RequestParam(value = "userid", defaultValue = "0") int userid) {
+        // User user = (User)(httpSession.getAttribute("user"));
         return shopDao.findByUserid(userid);
     }
 
-
+    /*
+    注册开店接口
+    */
     @RequestMapping("/create")
-    public Object createGoods(@RequestParam(value = "userid", defaultValue = "0")int userid, String master, String title, String detail, String imgurl, String email, String qq) {
-        User user = (User)(httpSession.getAttribute("user"));
+    public Object createGoods(String master, String title, String detail, String qq) {
+        User user = (User) (httpSession.getAttribute("user"));
+        int userid = user.getId();
         String phone = user.getPhone();
-        Shop shop = new Shop(userid,master,title,detail,imgurl,phone,email,qq);
+        String imgurl = user.getImgurl();
+        String email = user.getMail();
+        Shop shop = new Shop(userid, master, title, detail, imgurl, phone, email, qq);
         shopDao.save(shop);
         return new JsonMes(1, "创建店铺成功");
     }
 
     @RequestMapping("/updata")
     @JsonIgnore
-    public Object update(@RequestParam(value = "id", defaultValue = "0")int id,String master,String title,String detail) {
+    public Object update(@RequestParam(value = "id", defaultValue = "0") int id, String master, String title, String detail) {
         Shop shop = shopDao.findOne(id);
-        shop.update(master,title,detail);
+        shop.update(master, title, detail);
         return new JsonMes(1, "更新店铺成功");
     }
 

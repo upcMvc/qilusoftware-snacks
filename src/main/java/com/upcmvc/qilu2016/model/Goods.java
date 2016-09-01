@@ -23,6 +23,7 @@ public class Goods {
     private String imgurl;
     private String detail;
 
+
     private String creattime;
     private String updatetime;
     private boolean isdelete = false;
@@ -38,6 +39,7 @@ public class Goods {
         this.creattime = new Date().toString();
         this.updatetime = new Date().toString();
     }
+
 
     public Goods() {
     }
