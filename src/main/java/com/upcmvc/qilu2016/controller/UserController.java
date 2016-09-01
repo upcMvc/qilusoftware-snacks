@@ -98,14 +98,14 @@ public class UserController {
      */
     @RequestMapping(value = "/create")
     @ResponseBody
-    public Map<String, Object> create(String name, String mail, String password) {
-        System.out.println("name: " + name + "mail " + mail + "password " + password);
+    public Map<String, Object> create(String name, String mail, String password,String phone){
+        System.out.println("name: " + name + "mail " + mail + "password " + password + "phone" + phone);
         User user = null;
         BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
         Map<String, Object> userInfo = new HashMap<>();
         if (userDao.findByUsername(name) == null&&userDao.findByMail(mail) == null) {
             try {
-                user = new User(name, mail, passwordEncoder.encode(password));
+                user = new User(name, mail, phone,"标识构造函数",passwordEncoder.encode(password));
                 userDao.save(user);
                 userInfo.put("result", "注册成功");
                 userInfo.put("id", user.getId());
@@ -113,6 +113,7 @@ public class UserController {
                 userInfo.put("avatar", user.getImgurl());
                 userInfo.put("password", user.getPassword());
                 userInfo.put("mail", user.getMail());
+                userInfo.put("phone", user.getPhone());
 
                 httpSession.setAttribute("user",user);
 
