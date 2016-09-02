@@ -1,6 +1,7 @@
 package com.upcmvc.qilu2016.service;
 
 import com.upcmvc.qilu2016.controller.UpLoadFileController;
+import com.upcmvc.qilu2016.dto.JsonMes;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.core.io.ResourceLoader;
@@ -23,22 +24,19 @@ public class FileUploadService {
 
     public static final String ROOT = "/picture/";
 
-    public String handleFileUpload( MultipartFile file,
-                                   RedirectAttributes redirectAttributes) {
+    public String handleFileUpload(MultipartFile file) {
 
         if (!file.isEmpty()) {
             try {
                 Files.copy(file.getInputStream(), Paths.get(ROOT, file.getOriginalFilename()));
-                redirectAttributes.addFlashAttribute("message",
-                        "You successfully uploaded " + file.getOriginalFilename() + "!");
-            } catch (IOException |RuntimeException e) {
-                redirectAttributes.addFlashAttribute("message", "Failued to upload " + file.getOriginalFilename() + " => " + e.getMessage());
+            } catch (IOException | RuntimeException e) {
             }
+            return new JsonMes(-1,"上传失败");
         } else {
-            redirectAttributes.addFlashAttribute("message", "Failed to upload " + file.getOriginalFilename() + " because it was empty");
+            String url = new String();
+            url = "http://localhost:80" + ROOT + file.getOriginalFilename();
+            return url;
         }
-        String url =new String();
-        url="http://localhost:80" + ROOT + file.getOriginalFilename();
-        return url;
+
     }
 }

@@ -6,11 +6,13 @@ import com.upcmvc.qilu2016.dto.JsonMes;
 import com.upcmvc.qilu2016.model.Goods;
 import com.upcmvc.qilu2016.dao.GoodsDao;
 import com.upcmvc.qilu2016.model.Shop;
+import com.upcmvc.qilu2016.service.FileUploadService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpSession;
 
@@ -26,11 +28,13 @@ public class GoodsController {
     private GoodsDao goodsDao;
     @Autowired
     private ShopDao shopDao;
-
+    @Autowired
+    private FileUploadService fileUploadService;
 
     @RequestMapping(value = "/create",method = RequestMethod.GET)
-    public Object createGood(String price, String name, String imgurl, String detail, @RequestParam(value = "shopid", defaultValue = "0") int shopid, @RequestParam(value = "number", defaultValue = "0") int number) {
+    public Object createGood(MultipartFile file,String price, String name, String detail, @RequestParam(value = "shopid", defaultValue = "0") int shopid, @RequestParam(value = "number", defaultValue = "0") int number) {
         //  System.out.println(price + imgurl + shopid);
+        String imgurl = fileUploadService.handleFileUpload(MultipartFile file);
         Shop shop =(Shop)shopDao.findOne(shopid);
         String title = shop.getTitle();
         Goods goods = new Goods(shopid, number, price, name, imgurl, detail,title);
