@@ -28,10 +28,12 @@ public class GoodsController {
     private ShopDao shopDao;
 
 
-    @RequestMapping("/create")
+    @RequestMapping(value = "/create",method = RequestMethod.GET)
     public Object createGood(String price, String name, String imgurl, String detail, @RequestParam(value = "shopid", defaultValue = "0") int shopid, @RequestParam(value = "number", defaultValue = "0") int number) {
         //  System.out.println(price + imgurl + shopid);
-        Goods goods = new Goods(shopid, number, price, name, imgurl, detail);
+        Shop shop =(Shop)shopDao.findOne(shopid);
+        String title = shop.getTitle();
+        Goods goods = new Goods(shopid, number, price, name, imgurl, detail,title);
         goodsDao.save(goods);
         return new JsonMes(1, "创建成功");
     }
@@ -55,9 +57,9 @@ public class GoodsController {
 
     @RequestMapping(value = "/show", method = RequestMethod.GET)
     @JsonIgnore
-    public Object showGoods(@RequestParam(value = "id", defaultValue = "0") int id) {
+    public Object showGoods(@RequestParam(value = "shopid", defaultValue = "0") int shopid) {
 
-        return goodsDao.findOne(id);
+        return goodsDao.findByShopid(shopid);
     }
 
     @RequestMapping("/test")

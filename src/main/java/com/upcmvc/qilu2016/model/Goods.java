@@ -22,6 +22,7 @@ public class Goods {
     private String name;
     private String imgurl;
     private String detail;
+    private String title;
 
 
     private String creattime;
@@ -39,7 +40,17 @@ public class Goods {
         this.creattime = new Date().toString();
         this.updatetime = new Date().toString();
     }
-
+    public Goods(int shopid, int number, String price, String name, String imgurl, String detail,String title){
+        this.shopid = shopid;
+        this.number = number;
+        this.price = price;
+        this.name = name;
+        this.imgurl = imgurl;
+        this.detail = detail;
+        this.title = title;
+        this.creattime = new Date().toString();
+        this.updatetime = new Date().toString();
+    }
 
     public Goods() {
     }
@@ -118,6 +129,14 @@ public class Goods {
 
     public boolean isdelete() {
         return isdelete;
+    }
+
+    public String getTitle() {
+        return title;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
     }
 
     public void setIsdelete(boolean isdelete) {

@@ -38,21 +38,27 @@ public class IndexController {
      */
     @RequestMapping("/show")
     @JsonIgnore
-    public Object showGoods(@RequestParam(value = "userid", defaultValue = "0") int userid) {
+    public Object showGoods() {
         // User user = (User)(httpSession.getAttribute("user"));
-        return shopDao.findByUserid(userid);
+        return shopDao.findAll();
     }
 
     /*
     注册开店接口
     */
-    @RequestMapping("/create")
-    public Object createGoods(String master, String title, String detail, String qq) {
+    @RequestMapping(value = "/create",method = RequestMethod.GET)
+    public Object createGoods( String title, String phone ,String email, String qq,String detail ) {
         User user = (User) (httpSession.getAttribute("user"));
+        if(user==null)
+        {
+            return new JsonMes(0,"用户尚未登录");
+        }
+        String master = user.getUsername();
         int userid = user.getId();
-        String phone = user.getPhone();
         String imgurl = user.getImgurl();
-        String email = user.getMail();
+//        String master = "zfl";
+//        int userid =5;
+//        String imgurl = "dasf";
         Shop shop = new Shop(userid, master, title, detail, imgurl, phone, email, qq);
         shopDao.save(shop);
         return new JsonMes(1, "创建店铺成功");
@@ -66,4 +72,22 @@ public class IndexController {
         return new JsonMes(1, "更新店铺成功");
     }
 
+    @RequestMapping("/test")
+    public Object test(){
+        for(int i =0;i<10;i++)
+        {
+            int userid =i;
+            String master = "casdasd";
+            String title = "dasda";
+            String detail = "dsadf";
+            String imgsrc = "G:/桌面背景/2.jpg";
+            String phone = "663264";
+            String email = "dwtqeq@qq.com";
+            String qq = "4465233232";
+            Shop shop = new Shop(userid, master, title, detail, imgsrc, phone, email, qq);
+            shopDao.save(shop);
+        }
+
+        return new JsonMes(1,"OK");
+    }
 }

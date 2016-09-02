@@ -20,7 +20,7 @@ public class Shop {
     private String master;//店主
     private String title;//店名
     private String detail;//详细介绍
-    private String imgurl;
+    private String imgsrc;
     private String phone;
     private String email;
     private String qq;
@@ -32,12 +32,12 @@ public class Shop {
     public Shop(){
     }
 
-    public Shop(int userid, String master, String title, String detail, String imgurl, String phone, String email, String qq) {
+    public Shop(int userid, String master, String title, String detail, String imgsrc, String phone, String email, String qq) {
         this.userid = userid;
         this.master = master;
         this.title = title;
         this.detail = detail;
-        this.imgurl = imgurl;
+        this.imgsrc = imgsrc;
         this.email = email;
         this.phone = phone;
         this.qq = qq;
@@ -85,12 +85,12 @@ public class Shop {
         this.detail = detail;
     }
 
-    public String getImgurl() {
-        return imgurl;
+    public String getimgsrc() {
+        return imgsrc;
     }
 
-    public void setImgurl(String imgurl) {
-        this.imgurl = imgurl;
+    public void setimgsrc(String imgsrc) {
+        this.imgsrc = imgsrc;
     }
 
     public String getPhone() {

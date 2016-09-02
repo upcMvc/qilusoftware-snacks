@@ -69,15 +69,11 @@ public class GoodListController {
     }
 
     @RequestMapping("/ispay")
-    public Object ispay(boolean ispay) {
-        if (ispay) {
-           GoodList goodList =(GoodList) goodListDao.findByIspay(ispay);
+    public Object ispay() {
+           GoodList goodList =(GoodList) goodListDao.findByIspay(false);
             goodList.ispay();
             goodListDao.save(goodList);
-            return new JsonMes(1, "该商品已经付款");
-        } else {
-            return new JsonMes(0, "该商品尚未付款");
-        }
+            return new JsonMes(1, "商品已经付款");
 
     }
 
