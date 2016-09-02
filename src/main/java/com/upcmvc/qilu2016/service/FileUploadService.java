@@ -1,9 +1,11 @@
 package com.upcmvc.qilu2016.service;
 
+import com.upcmvc.qilu2016.config.Config;
 import com.upcmvc.qilu2016.controller.UpLoadFileController;
 import com.upcmvc.qilu2016.dto.JsonMes;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.ResourceLoader;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -22,20 +24,20 @@ public class FileUploadService {
 
     private static final Logger log = LoggerFactory.getLogger(UpLoadFileController.class);
 
-    public static final String ROOT = "/picture/";
+    public static final String ROOT = "file";
 
-    public String handleFileUpload(MultipartFile file) {
+    @Autowired
+    private Config config;
+
+    public String handleFileUpload(MultipartFile file) throws IOException {
+
+        String imgname =  "mvc" + System.currentTimeMillis();
 
         if (!file.isEmpty()) {
-            try {
-                Files.copy(file.getInputStream(), Paths.get(ROOT, file.getOriginalFilename()));
-            } catch (IOException | RuntimeException e) {
-            }
-            return new JsonMes(-1,"上传失败");
-        } else {
-            String url = new String();
-            url = "http://localhost:80" + ROOT + file.getOriginalFilename();
-            return url;
+                Files.copy(file.getInputStream(), Paths.get(ROOT, imgname));
+                return config.serveraddress + "/file/" + imgname;
+        }else {
+            return "上传失败";
         }
 
     }

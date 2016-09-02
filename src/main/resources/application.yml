@@ -15,6 +15,9 @@ spring:
         dialect: org.hibernate.dialect.MySQL5Dialect
   thymeleaf:
       mode: LEGACYHTML5
+multipart:
+  maxFileSize: 12800KB
+  maxRequestSize: 12800KB
 qqoauth:
   appid: "101335412"
   appkey: "686864ec209fa7a4c2705dda5a6b6c9f"

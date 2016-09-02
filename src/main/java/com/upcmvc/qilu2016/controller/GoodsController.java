@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpSession;
+import java.io.IOException;
 
 /**
  * Created by 陈子枫 on 2016/7/11.
@@ -32,9 +33,9 @@ public class GoodsController {
     private FileUploadService fileUploadService;
 
     @RequestMapping(value = "/create",method = RequestMethod.GET)
-    public Object createGood(MultipartFile file,String price, String name, String detail, @RequestParam(value = "shopid", defaultValue = "0") int shopid, @RequestParam(value = "number", defaultValue = "0") int number) {
+    public Object createGood(MultipartFile file,String price, String name, String detail, @RequestParam(value = "shopid", defaultValue = "0") int shopid, @RequestParam(value = "number", defaultValue = "0") int number) throws IOException {
         //  System.out.println(price + imgurl + shopid);
-        String imgurl = fileUploadService.handleFileUpload(MultipartFile file);
+        String imgurl = fileUploadService.handleFileUpload(file);
         Shop shop =(Shop)shopDao.findOne(shopid);
         String title = shop.getTitle();
         Goods goods = new Goods(shopid, number, price, name, imgurl, detail,title);

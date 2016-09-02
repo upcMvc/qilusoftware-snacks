@@ -24,7 +24,6 @@ public class Qilu2016Application {
 	CommandLineRunner init() {
 		return (args) -> {
 			FileSystemUtils.deleteRecursively(new File(UpLoadFileController.ROOT));
-
 			Files.createDirectory(Paths.get(UpLoadFileController.ROOT));
 		};
 	}

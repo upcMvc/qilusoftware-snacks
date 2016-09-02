@@ -22,12 +22,12 @@ import static org.springframework.hateoas.mvc.ControllerLinkBuilder.methodOn;
 /**
  * Created by wanghaojun on 2016/7/15.
  */
-@Controller
-
+@RestController
+@RequestMapping("/file")
 public class UpLoadFileController {
     private static final Logger log = LoggerFactory.getLogger(UpLoadFileController.class);
 
-    public static final String ROOT = "/picture/";
+    public static final String ROOT = "file";
 
     private final ResourceLoader resourceLoader;
 
@@ -36,20 +36,8 @@ public class UpLoadFileController {
         this.resourceLoader = resourceLoader;
     }
 
-    @RequestMapping(method = RequestMethod.GET, value = "/")
-    public String provideUploadInfo(Model model) throws IOException {
 
-        model.addAttribute("files", Files.walk(Paths.get(ROOT))
-                .filter(path -> !path.equals(Paths.get(ROOT)))
-                .map(path -> Paths.get(ROOT).relativize(path))
-                .map(path -> linkTo(methodOn(UpLoadFileController.class).getFile(path.toString())).withRel(path.toString()))
-                .collect(Collectors.toList()));
-
-        return "uploadForm";
-    }
-
-    @RequestMapping(method = RequestMethod.GET, value = ROOT + "/{filename:.+}")
-    @ResponseBody
+    @RequestMapping(method = RequestMethod.GET, value = "/{filename:.+}")
     public ResponseEntity<?> getFile(@PathVariable String filename) {
 
         try {
