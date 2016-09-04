@@ -52,15 +52,16 @@ public class UserController {
         return user;
     }
 
-    @RequestMapping(value = "/login",method = RequestMethod.POST)
+    @RequestMapping(value = "/login",method = RequestMethod.GET)
     @JsonIgnore
     public Object doLogin(String username, String password){
         User user = userDao.findByUsername(username);
+        if(user == null) return  new JsonMes(-1,"用户名或密码错误");
         System.out.println("用户登录");
         BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
         if (passwordEncoder.matches(password,user.getPassword())){
             httpSession.setAttribute("user",user);
-            return user;
+            return new JsonMes(1,"登录成功");
         }else {
             return new JsonMes(-1,"用户名或密码错误");
         }
