@@ -1,6 +1,7 @@
 package com.upcmvc.qilu2016.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.upcmvc.qilu2016.util.MailUtils;
 
 import javax.persistence.*;
 import java.util.Date;
@@ -50,6 +51,15 @@ public class GoodList {
         this.num = num;
         this.name = name;
         this.price = price;
+        this.ispay = ispay;
+        this.creattime = new Date().toString();
+        this.updatetime = new Date().toString();
+    }
+    public GoodList(int goodsid,int orderid,int num,String name ,boolean ispay){
+        this.goodsid = goodsid;
+        this.orderid = orderid;
+        this.num = num;
+        this.name = name;
         this.ispay = ispay;
         this.creattime = new Date().toString();
         this.updatetime = new Date().toString();
@@ -155,6 +165,11 @@ public class GoodList {
     public boolean ispay(boolean ispay){
         ispay = true;
         return ispay;
+    }
+
+    public void sendmail(String email,String good){
+        MailUtils mailUtils = new MailUtils();
+        mailUtils.send(email,good);
     }
 }
 

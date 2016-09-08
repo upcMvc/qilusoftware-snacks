@@ -32,7 +32,7 @@ public class GoodsController {
     @Autowired
     private FileUploadService fileUploadService;
 
-    @RequestMapping(value = "/create",method = RequestMethod.GET)
+    @RequestMapping(value = "/create",method = RequestMethod.POST)
     public Object createGood(MultipartFile file,String price, String name, String detail, @RequestParam(value = "shopid", defaultValue = "0") int shopid, @RequestParam(value = "number", defaultValue = "0") int number) throws IOException {
         //  System.out.println(price + imgurl + shopid);
         String imgurl = fileUploadService.handleFileUpload(file);
