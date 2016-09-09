@@ -15,5 +15,6 @@ public interface ShopDao extends CrudRepository<Shop, Integer> {
     public Iterable<Shop> findByTitleOrMaster(String title, String master);
     public Shop findByUserid(int userid);
     public Iterable<Shop> findAll();
+    //public Iterable<Shop> findBy
 
 }

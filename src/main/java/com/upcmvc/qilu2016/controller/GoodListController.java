@@ -6,6 +6,7 @@ import com.upcmvc.qilu2016.dao.GoodsDao;
 import com.upcmvc.qilu2016.dao.ShopDao;
 import com.upcmvc.qilu2016.dao.UserDao;
 import com.upcmvc.qilu2016.dto.JsonMes;
+import com.upcmvc.qilu2016.dto.MailDTo;
 import com.upcmvc.qilu2016.model.GoodList;
 import com.upcmvc.qilu2016.model.Goods;
 import com.upcmvc.qilu2016.model.Shop;
@@ -19,7 +20,10 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.servlet.http.HttpSession;
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Iterator;
+import java.util.List;
 
 /**
  * Created by 陈子枫 on 2016/7/13.
@@ -49,27 +53,53 @@ public class GoodListController {
 //        String name = null;
 //        boolean ispay = false;
 //        GoodList goodList = new GoodList(goodsid,orderid,num,nge,ispay);
+        int id =0;
+        String good = "对不起，你的商品为空";
         Iterator<GoodList> goodLists = ((Iterable<GoodList>)goodListDao.findByIspay(false)).iterator();
         System.out.println("pay");
+        List<MailDTo> list = new ArrayList<MailDTo>();
         while(goodLists.hasNext())
         {
             GoodList goodList = goodLists.next();
             System.out.println("has next");
             if(goodList == null) break;
             System.out.println(" good list is not null");
+
             int goodsid =goodList.getGoodsid();
             int num = goodList.getNum();
             String name = goodList.getName();
+
             Goods goods = (Goods)goodsDao.findOne(goodsid);
             System.out.println("good id:" + goodsid);
             int shopid =goods.getShopid();
             System.out.println("shop id:" + shopid);
+
             Shop shop =(Shop)shopDao.findOne(shopid);
             String email = shop.getEmail();
             System.out.println("mail:" + email);
-            String good = name +" " + num + " " + address;
-            goodList.sendmail("704734862@qq.com",good);
+            MailDTo  mailDTo = new MailDTo(name,num,email,shopid);
+            list.add(mailDTo);
         }
+        Collections.sort(list);
+        Iterator<MailDTo> li = list.iterator();
+        while(li.hasNext()){
+            MailDTo maildto = li.next();
+            if(maildto.shopid==id){
+              good = good + maildto.name + " "+ maildto.number + " ";
+            }else {
+                id = maildto.shopid;
+                if(id ==0) {}
+                else{
+                    GoodList goodList = new GoodList();
+                    goodList.sendmail(maildto.email,good+address);
+                    good = "您的商品为：";
+                }
+            }
+        }
+
+//
+//        good = good + "买家地址是："+address;
+//        goodList.sendmail("704734862@qq.com",good);
 
         return goodListDao.findAll();
     }
@@ -115,8 +145,12 @@ public class GoodListController {
     @RequestMapping("/test")
     public Object test() {
 
-        for (int i = 1; i < 10; i++) {
-            int goodsid = i;
+        for (int i = 1; i < 20; i++) {
+            int goodsid ;
+            if(i%2==0)
+                goodsid=1;
+            else
+            goodsid=i;
             int orderid = i;
             int num = i + 5;
             boolean ispay;
@@ -125,7 +159,7 @@ public class GoodListController {
             else
                  ispay = true;
             String name = "latiao";
-            float price = 3;
+            float price = 3+i;
             GoodList goodList = new GoodList(goodsid, orderid, num, name, price,ispay);
             goodListDao.save(goodList);
         }

@@ -27,22 +27,7 @@ public class GoodsTest {
     @Autowired
     OrderFormDao orderFormDao;
 
-    @Test
-    @RequestMapping("/test")
-    public Object goodtest() {
-        for (int i = 1; i <= 10; i++) {
-            int shopid = i;
-            int number = i;
-            System.out.println(shopid);
-            String price = "123";
-            String name = "456";
-            String imgurl = "wanghaojun";
-            String detail = "chengzifeng";
-            Goods goods = new Goods(shopid, number, price, name, imgurl, detail);
-            goodsDao.save(goods);
 
-        }
-        return new JsonMes(1, "charu");
-    }
+
 
 }
