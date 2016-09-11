@@ -17,7 +17,7 @@ public class Goods {
     private int id;
 
     private int shopid;
-    private int number;
+    private int quantity;
     private String price;
     private String name;
     private String imgurl;
@@ -30,9 +30,9 @@ public class Goods {
     private boolean isdelete = false;
 
 
-    public Goods(int shopid, int number, String price, String name, String imgurl, String detail) {
+    public Goods(int shopid, int quantity, String price, String name, String imgurl, String detail) {
         this.shopid = shopid;
-        this.number = number;
+        this.quantity = quantity;
         this.price = price;
         this.name = name;
         this.imgurl = imgurl;
@@ -40,9 +40,9 @@ public class Goods {
         this.creattime = new Date().toString();
         this.updatetime = new Date().toString();
     }
-    public Goods(int shopid, int number, String price, String name, String imgurl, String detail,String title){
+    public Goods(int shopid, int quantity, String price, String name, String imgurl, String detail, String title){
         this.shopid = shopid;
-        this.number = number;
+        this.quantity = quantity;
         this.price = price;
         this.name = name;
         this.imgurl = imgurl;
@@ -51,7 +51,15 @@ public class Goods {
         this.creattime = new Date().toString();
         this.updatetime = new Date().toString();
     }
-
+    public Goods(int shopid,String price,String name,String imgurl,String title){
+        this.shopid = shopid;
+        this.price = price;
+        this.imgurl  = imgurl;
+        this.name = name;
+        this.title = title;
+        this.creattime = new Date().toString();
+        this.updatetime = new Date().toString();
+    }
     public Goods() {
     }
 
@@ -71,12 +79,12 @@ public class Goods {
         this.shopid = shopid;
     }
 
-    public int getNumber() {
-        return number;
+    public int getQuantity() {
+        return quantity;
     }
 
-    public void setNumber(int number) {
-        this.number = number;
+    public void setQuantity(int quantity) {
+        this.quantity = quantity;
     }
 
     public String getPrice() {
@@ -149,11 +157,14 @@ public class Goods {
     }
 
     public void update(int number, String price, String detail, String imgurl) {
-        this.number = number;
+        this.quantity = number;
         this.price = price;
         this.detail = detail;
         this.imgurl = imgurl;
         this.updatetime = new Date().toString();
     }
-
+    public void update(String imgurl){
+        this.imgurl = imgurl;
+        this.updatetime = new Date().toString();
+    }
 }

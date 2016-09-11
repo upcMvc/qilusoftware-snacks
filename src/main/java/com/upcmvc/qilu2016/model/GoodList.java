@@ -90,11 +90,11 @@ public class GoodList {
         this.orderid = orderid;
     }
 
-    public int getNum() {
+    public int getnum() {
         return num;
     }
 
-    public void setNum(int num) {
+    public void setnum(int num) {
         this.num = num;
     }
 
@@ -145,6 +145,7 @@ public class GoodList {
     public void setIspay(boolean ispay) {
         this.ispay = ispay;
     }
+
 
     public void delete(){
         this.isdelete = true;

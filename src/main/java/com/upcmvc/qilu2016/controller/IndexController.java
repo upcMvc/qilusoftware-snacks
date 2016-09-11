@@ -60,6 +60,8 @@ public class IndexController {
 //        int userid =5;
 //        String imgurl = "dasf";
         Shop shop = new Shop(userid, master, title, detail, imgurl, phone, email, qq);
+        user.setSellerid(shop.getId());
+        user.setIsmaster(true);
         shopDao.save(shop);
         return new JsonMes(1, "创建店铺成功");
     }
@@ -71,7 +73,23 @@ public class IndexController {
         shop.update(master, title, detail);
         return new JsonMes(1, "更新店铺成功");
     }
-
+    @RequestMapping("/ownshop")
+    public Object ownShop(){
+        User user = (User)httpSession.getAttribute("user");
+        int id = 2;
+        boolean ismaster = true;
+        if(user ==null){
+            return new JsonMes(-1,"你还未登录");
+        }else {
+            id = user.getId();
+            ismaster = user.getIsmaster();
+        }
+        if(ismaster){
+            return userDao.findByIdAndIsdelete(id,false);
+        }else {
+            return new JsonMes(-1,"您不是店主");
+        }
+    }
     @RequestMapping("/test")
     public Object test(){
         for(int i =0;i<10;i++)
@@ -89,5 +107,9 @@ public class IndexController {
         }
 
         return new JsonMes(1,"OK");
+    }
+    @RequestMapping(value = "/showshop",method = RequestMethod.GET)
+    public Object showshop(@RequestParam(value = "id",defaultValue = "0")int id){
+        return shopDao.findOne(id);
     }
 }
