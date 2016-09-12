@@ -38,13 +38,15 @@ public class GoodsController {
     @Autowired
     private UserDao userDao;
 
-
+    /*
+    上传商品照片的接口
+    */
     @RequestMapping(value = "/create",method = RequestMethod.POST)
     public Object createGood(MultipartFile file,String price, String name ) throws IOException {
         User user =(User) httpSession.getAttribute("user");
         if(user == null){
             return new JsonMes(-1,"你还未登录");
-        }else {
+        }
         String imgurl = fileUploadService.handleFileUpload(file);
         int id = user.getSellerid();
         Shop shop =(Shop)shopDao.findOne(id);
@@ -52,7 +54,7 @@ public class GoodsController {
         int shopid = shop.getId();
         Goods goods = new Goods(shopid,price, name, imgurl,title);
         goodsDao.save(goods);
-        return new JsonMes(1, "创建成功");}
+        return new JsonMes(1, "创建成功");
     }
 //    @RequestMapping(value = "/putgood",method = RequestMethod.POST)
 //    public Object putgood(String price, String name, String detail, @RequestParam(value = "shopid", defaultValue = "0") int shopid,
@@ -79,7 +81,9 @@ public class GoodsController {
         goodsDao.save(goods);
         return new JsonMes(1, "更新成功");
     }
-
+    /*
+    根据shopid寻找店铺
+    */
     @RequestMapping(value = "/show", method = RequestMethod.GET)
     @JsonIgnore
     public Object showGoods(@RequestParam(value = "shopid", defaultValue = "0") int shopid) {
@@ -102,7 +106,6 @@ public class GoodsController {
             String detail = "chengzifeng";
             Goods goods = new Goods(shopid, number, price, name, imgurl, detail);
             goodsDao.save(goods);
-
         }
         return new JsonMes(1, "charu");
     }

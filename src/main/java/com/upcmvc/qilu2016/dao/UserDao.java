@@ -12,4 +12,5 @@ public interface UserDao extends CrudRepository<User,Integer> {
         User findByMail(String mail);
         User findByUsername(String username);
         User findByIdAndIsdelete(int id,boolean isdelete);
+        User findBySelleridAndIsmaster(int sellerid,boolean ismaster);
 }

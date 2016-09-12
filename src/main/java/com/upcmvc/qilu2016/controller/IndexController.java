@@ -34,8 +34,8 @@ public class IndexController {
 
 
     /*
-    根据 userid 查找用户信息
-     */
+    *主页信息
+    */
     @RequestMapping("/show")
     @JsonIgnore
     public Object showGoods() {
@@ -73,21 +73,26 @@ public class IndexController {
         shop.update(master, title, detail);
         return new JsonMes(1, "更新店铺成功");
     }
+    /*
+    * 个人店铺接口，显示个人店铺的商品
+    * */
     @RequestMapping("/ownshop")
     public Object ownShop(){
         User user = (User)httpSession.getAttribute("user");
-        int id = 2;
-        boolean ismaster = true;
+        int id ;
+        boolean ismaster;
         if(user ==null){
             return new JsonMes(-1,"你还未登录");
         }else {
-            id = user.getId();
+            id = user.getSellerid();
             ismaster = user.getIsmaster();
+            System.out.println(ismaster);
+            System.out.println(id);
         }
         if(ismaster){
-            return userDao.findByIdAndIsdelete(id,false);
+            return userDao.findBySelleridAndIsmaster(id,true);
         }else {
-            return new JsonMes(-1,"您不是店主");
+            return new JsonMes(0,"您不是店主");
         }
     }
     @RequestMapping("/test")

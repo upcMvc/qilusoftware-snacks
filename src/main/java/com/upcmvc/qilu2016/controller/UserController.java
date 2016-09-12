@@ -61,8 +61,10 @@ public class UserController {
         BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
         if (passwordEncoder.matches(password,user.getPassword())){
             httpSession.setAttribute("user",user);
+            System.out.println("登陆成功");
             return new JsonMes(1,"登录成功");
         }else {
+            System.out.println("登陆失败");
             return new JsonMes(-1,"用户名或密码错误");
         }
     }
