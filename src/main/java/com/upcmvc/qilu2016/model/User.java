@@ -7,6 +7,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import java.util.Date;
+import java.util.Random;
 
 /**
  * Created by lenovo on 2016/5/30.
@@ -57,11 +58,12 @@ public class User {
     }
 
     public User(String username,String mail,String phone,String flag,String password){
+        Random random = new Random();
+        this.imgurl = "http://mvc.y1code.cn:8080/file/" + random.nextInt(9);
         this.username = username;
         this.password = password;
         this.mail = mail;
         this.phone = phone;
-        this.imgurl = "http://g.hiphotos.baidu.com/zhidao/wh%3D450%2C600/sign=ef849d229e22720e7b9beafe4efb2670/79f0f736afc37931ec26be69edc4b74543a91127.jpg";
         this.creattime = new Date().toString();
         this.updatetime = new Date().toString();
     }
