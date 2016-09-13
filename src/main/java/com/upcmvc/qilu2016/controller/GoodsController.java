@@ -48,8 +48,8 @@ public class GoodsController {
             return new JsonMes(-1,"你还未登录");
         }
         String imgurl = fileUploadService.handleFileUpload(file);
-        int id = user.getSellerid();
-        Shop shop =(Shop)shopDao.findOne(id);
+        int id = user.getId();
+        Shop shop =(Shop)shopDao.findByUserid(id);
         String title = shop.getTitle();
         int shopid = shop.getId();
         Goods goods = new Goods(shopid,price, name, imgurl,title);
