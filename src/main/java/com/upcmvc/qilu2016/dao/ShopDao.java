@@ -14,7 +14,7 @@ public interface ShopDao extends CrudRepository<Shop, Integer> {
     public Shop findByIsdeleteOrderByIdDesc(boolean isdelete);
     public Iterable<Shop> findByTitleOrMaster(String title, String master);
     public Shop findByUserid(int userid);
-    public Iterable<Shop> findAll();
+    Iterable<Shop> findByIdAndIsdelete(int id,boolean isdelete);
     //public Iterable<Shop> findBy
 
 }

@@ -17,7 +17,7 @@ public class Goods {
     private int id;
 
     private int shopid;
-    private int quantity;
+    private int quantity = 1;
     private String price;
     private String name;
     private String imgurl;

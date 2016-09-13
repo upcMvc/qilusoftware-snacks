@@ -38,24 +38,6 @@ public class GoodsController {
     @Autowired
     private UserDao userDao;
 
-    /*
-    上传商品照片的接口
-    */
-    @RequestMapping(value = "/create",method = RequestMethod.POST)
-    public Object createGood(MultipartFile file,String price, String name ) throws IOException {
-        User user =(User) httpSession.getAttribute("user");
-        if(user == null){
-            return new JsonMes(-1,"你还未登录");
-        }
-        String imgurl = fileUploadService.handleFileUpload(file);
-        int id = user.getId();
-        Shop shop =(Shop)shopDao.findByUserid(id);
-        String title = shop.getTitle();
-        int shopid = shop.getId();
-        Goods goods = new Goods(shopid,price, name, imgurl,title);
-        goodsDao.save(goods);
-        return new JsonMes(1, "创建成功");
-    }
 //    @RequestMapping(value = "/putgood",method = RequestMethod.POST)
 //    public Object putgood(String price, String name, String detail, @RequestParam(value = "shopid", defaultValue = "0") int shopid,
 //                          @RequestParam(value = "number", defaultValue = "0") int number){
@@ -67,6 +49,7 @@ public class GoodsController {
 //    }
     @RequestMapping("/delete")
     public Object deleteGood(@RequestParam(value = "id", defaultValue = "0") int id) {
+        System.out.println("id:" + id);
         Goods goods = goodsDao.findOne(id);
         goods.delete();
         goodsDao.save(goods);
@@ -88,7 +71,7 @@ public class GoodsController {
     @JsonIgnore
     public Object showGoods(@RequestParam(value = "shopid", defaultValue = "0") int shopid) {
 
-        return goodsDao.findByShopid(shopid);
+        return goodsDao.findByShopidAndIsdelete(shopid,false);
     }
     @RequestMapping("/test")
     public Object goodtest() {

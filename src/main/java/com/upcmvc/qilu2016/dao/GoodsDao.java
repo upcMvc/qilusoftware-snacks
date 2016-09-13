@@ -8,5 +8,6 @@ import org.springframework.data.repository.CrudRepository;
  */
 public interface GoodsDao extends CrudRepository<Goods, Integer> {
     public Iterable<Goods> findByShopid(int shopid);
+    Iterable<Goods> findByShopidAndIsdelete(int shopid,boolean isdelete);
 //    public Iterable<Goods> findOrderByShopidDesc(int shopid);
 }

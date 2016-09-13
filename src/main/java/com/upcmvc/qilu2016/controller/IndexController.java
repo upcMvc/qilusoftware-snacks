@@ -42,18 +42,24 @@ public class IndexController {
         // User user = (User)(httpSession.getAttribute("user"));
         return shopDao.findAll();
     }
-
+    @RequestMapping("/ismaster")
+    public Object isMaster(){
+        User user = (User) (httpSession.getAttribute("user"));
+        if(user==null) {
+            return new JsonMes(0,"用户尚未登录");
+        }
+        if (!user.getIsmaster()){
+            return new JsonMes(1,"您可以开店");
+        }else {
+            return new JsonMes(-1,"对不起您已经是店主");
+        }
+    }
     /*
     注册开店接口
     */
     @RequestMapping(value = "/create",method = RequestMethod.GET)
     public Object createGoods( String title, String phone ,String email, String qq,String detail ) {
         User user = (User) (httpSession.getAttribute("user"));
-        if(user==null)
-        {
-            return new JsonMes(0,"用户尚未登录");
-        }
-        if (user.getIsmaster()){
             String master = user.getUsername();
             int userid = user.getId();      //shop表中的userid和user表中的id绑定，可以根据user的id找到相应的店铺
             String imgurl = user.getImgurl();
@@ -66,10 +72,6 @@ public class IndexController {
             user.setIsmaster(true);     //将ismaster改为true，标志成为店主
             userDao.save(user);
             return new JsonMes(1, "创建店铺成功");
-        }else {
-            return new JsonMes(-1,"对不起，您已经是店主");
-        }
-
     }
 
     @RequestMapping("/updata")
@@ -85,23 +87,23 @@ public class IndexController {
     @RequestMapping("/ownshop")
     public Object ownShop(){
         User user = (User)httpSession.getAttribute("user");
-        int sellerid ;
-        boolean ismaster;
-        System.out.println(user.getIsmaster());
-        System.out.println(user.getSellerid());
+
         if(user ==null){
             return new JsonMes(-1,"你还未登录");
         }else {
-            sellerid = user.getSellerid();
-            ismaster = user.getIsmaster();
+            System.out.println(user.getIsmaster());
+            System.out.println(user.getSellerid());
+           int sellerid = user.getSellerid();
+          boolean  ismaster = user.getIsmaster();
             System.out.println(ismaster);
             System.out.println(sellerid);
+            if(ismaster){
+                return  shopDao.findOne(sellerid);
+            }else {
+                return new JsonMes(0,"您不是店主");
+            }
         }
-        if(ismaster){
-            return  shopDao.findOne(sellerid);
-        }else {
-            return new JsonMes(0,"您不是店主");
-        }
+
     }
     @RequestMapping("/test")
     public Object test(){
