@@ -50,10 +50,11 @@ public class GoodListController {
         User user = (User) httpSession.getAttribute("user");
         int orderid;
         if (user == null) {
-            orderid = 1;
-            // return new JsonMes(0, "用户尚未登录");
+
+            return new JsonMes(0, "用户尚未登录");
         } else {
             orderid = user.getId();
+            System.out.println("orderid is: " + orderid);
         }
         return goodListDao.findByOrderidAndIsdelete(orderid,false);
     }
@@ -114,9 +115,8 @@ public class GoodListController {
         User user = (User) httpSession.getAttribute("user");
         int orderid;
         if (user == null)
-            orderid = 1;
-        else
-            orderid = user.getId();
+            return new JsonMes(-1,"您还未登录录");
+        else orderid = user.getId();
 
         GoodList goodList = new GoodList(goodsid, orderid, num, name, price);
         goodListDao.save(goodList);
@@ -126,9 +126,11 @@ public class GoodListController {
     @RequestMapping(value = "/delete", method = RequestMethod.GET)
     @JsonIgnore
     public Object delete(@RequestParam(value = "id", defaultValue = "0") int id) {
+        System.out.println(id);
         GoodList goodList = goodListDao.findOne(id);
         goodList.delete();
         goodListDao.save(goodList);
+        System.out.println(goodList.isdelete());
         return new JsonMes(1, "删除成功");
     }
 
