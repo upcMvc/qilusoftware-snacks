@@ -25,4 +25,4 @@ qqoauth:
   state: "qq"
 server:
   port: 8080
-serveraddress: http://localhost:8080
+serveraddress: http://mvc.y1code.cn:8080
