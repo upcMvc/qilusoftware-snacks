@@ -49,8 +49,7 @@ public class User {
     } //空的构造函数
 
     public User(String username,String mail,String password){
-        Random random = new Random();
-        this.imgurl = "http://mvc.y1code.cn:8080/file/" + random.nextInt(9);
+        this.imgurl = "http://mvc.y1code.cn:8080/file/" + (int) ( 10 * Math.random());;
         this.username = username;
         this.password = password;
         this.mail = mail;

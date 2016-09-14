@@ -4,7 +4,7 @@ import time
 
 ip = '115.159.153.43'
 user = 'root'
-password = ''
+password = 'jj2013914'
 jar = 'Qilu2016-0.0.1-SNAPSHOT.jar'
 home='/home/springboot/qilu'
 current=home+"/current"
