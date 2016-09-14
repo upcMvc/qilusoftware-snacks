@@ -23,8 +23,11 @@ public class Qilu2016Application {
 	@Bean
 	CommandLineRunner init() {
 		return (args) -> {
-			FileSystemUtils.deleteRecursively(new File(UpLoadFileController.ROOT));
-			Files.createDirectory(Paths.get(UpLoadFileController.ROOT));
+			File file = new File(UpLoadFileController.ROOT);
+			if(!file.exists()){
+				Files.createDirectory(Paths.get(UpLoadFileController.ROOT));
+			}
+
 		};
 	}
 }
