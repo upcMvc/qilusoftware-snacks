@@ -38,15 +38,7 @@ public class GoodsController {
     @Autowired
     private UserDao userDao;
 
-//    @RequestMapping(value = "/putgood",method = RequestMethod.POST)
-//    public Object putgood(String price, String name, String detail, @RequestParam(value = "shopid", defaultValue = "0") int shopid,
-//                          @RequestParam(value = "number", defaultValue = "0") int number){
-//        Shop shop =(Shop)shopDao.findOne(shopid);
-//        String title = shop.getTitle();
-//        Goods goods = new Goods(shopid, number, price, name,detail,title);
-//        goodsDao.save(goods);
-//        return new JsonMes(1, "创建成功");
-//    }
+
     @RequestMapping("/delete")
     public Object deleteGood(@RequestParam(value = "id", defaultValue = "0") int id) {
         System.out.println("id:" + id);
@@ -72,24 +64,5 @@ public class GoodsController {
     public Object showGoods(@RequestParam(value = "shopid", defaultValue = "0") int shopid) {
 
         return goodsDao.findByShopidAndIsdelete(shopid,false);
-    }
-    @RequestMapping("/test")
-    public Object goodtest() {
-        for (int i = 1; i <= 10; i++) {
-            int shopid;
-            if(i%2==0)
-                shopid=1;
-            else
-                shopid=i;
-            int number = i;
-            System.out.println(shopid);
-            String price = "123";
-            String name = "456";
-            String imgurl = "wanghaojun";
-            String detail = "chengzifeng";
-            Goods goods = new Goods(shopid, number, price, name, imgurl, detail);
-            goodsDao.save(goods);
-        }
-        return new JsonMes(1, "charu");
     }
 }

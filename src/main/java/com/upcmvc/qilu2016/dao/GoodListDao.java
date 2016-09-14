@@ -11,4 +11,5 @@ public interface GoodListDao extends CrudRepository<GoodList,Integer> {
     public Iterable<GoodList> findByIspay(boolean ispay);
     public Iterable<GoodList> findAll();
     Iterable<GoodList> findByOrderidAndIsdelete(int orderid,boolean isdelete);
+    Iterable<GoodList> findByOrderidAndIspay(int orderid,boolean ispay);
 }

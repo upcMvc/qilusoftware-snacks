@@ -11,6 +11,7 @@ import com.upcmvc.qilu2016.model.GoodList;
 import com.upcmvc.qilu2016.model.Goods;
 import com.upcmvc.qilu2016.model.Shop;
 import com.upcmvc.qilu2016.model.User;
+import com.upcmvc.qilu2016.util.MailUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.h2.H2ConsoleAutoConfiguration;
 import org.springframework.security.access.method.P;
@@ -56,16 +57,16 @@ public class GoodListController {
             orderid = user.getId();
             System.out.println("orderid is: " + orderid);
         }
-        return goodListDao.findByOrderidAndIsdelete(orderid,false);
+        return goodListDao.findByOrderidAndIspay(orderid,false);
     }
 
     @RequestMapping("/putorder")
     public Object putOrder(String address) {
         int id = 0;
-        String good = "对不起，你的商品为空";
-        Iterator<GoodList> goodLists = ((Iterable<GoodList>) goodListDao.findByIspay(false)).iterator();
+        String good = "您的商品为：";
+        Iterator<GoodList> goodLists = ( goodListDao.findByIspay(false)).iterator();
         System.out.println("pay");
-        List<MailDTo> list = new ArrayList<MailDTo>();
+        List<MailDTo> list = new ArrayList<>();
         // User user = (User) httpSession.getAttribute("user");
         //String phone = user.getPhone();
         while (goodLists.hasNext()) {
@@ -78,12 +79,12 @@ public class GoodListController {
             int num = goodList.getnum();
             String name = goodList.getName();
 
-            Goods goods = (Goods) goodsDao.findOne(goodsid);
+            Goods goods =  goodsDao.findOne(goodsid);
             System.out.println("good id:" + goodsid);
             int shopid = goods.getShopid();
             System.out.println("shop id:" + shopid);
 
-            Shop shop = (Shop) shopDao.findOne(shopid);
+            Shop shop = shopDao.findOne(shopid);
             String email = shop.getEmail();
             System.out.println("mail:" + email);
             MailDTo mailDTo = new MailDTo(name, num, email, shopid);
@@ -91,18 +92,34 @@ public class GoodListController {
         }
         Collections.sort(list);
         Iterator<MailDTo> li = list.iterator();
+        boolean flag = false;
         while (li.hasNext()) {
+
             MailDTo maildto = li.next();
             if (maildto.shopid == id) {
                 good = good + maildto.name + " " + maildto.number + " ";
+                System.out.println("good:" + good);
             } else {
+                String temgood = "";
                 id = maildto.shopid;
-                if (id == 0) {
-                } else {
-                    GoodList goodList = new GoodList();
-                    goodList.sendmail(maildto.email, good + address);
-                    good = "您的商品为：";
+                Iterable<GoodList> goodListes =  goodListDao.findByIspay(false);
+                int count = 0;
+                for (GoodList goodlist: goodListes
+                     ) {
+                    goodlist.setIspay(true);
+                    goodListDao.save(goodlist);
+                   temgood = goodlist.getName();
+                    ++count;
                 }
+                if(flag==false){
+                    good = "名字" + temgood + "数量" + count;
+                    flag = true;
+                }
+                MailUtils mail = new MailUtils();
+                mail.send(maildto.email, good +"地址是："+ address);
+
+                good = "您的商品为：";
+
             }
         }
         return new JsonMes(1, "提交成功");
@@ -145,9 +162,7 @@ public class GoodListController {
 
     @RequestMapping("/ispay")
     public Object ispay() {
-        GoodList goodList = (GoodList) goodListDao.findByIspay(false);
-        goodList.ispay();
-        goodListDao.save(goodList);
+
         return new JsonMes(1, "商品已经付款");
 
     }
