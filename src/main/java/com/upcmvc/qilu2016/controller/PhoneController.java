@@ -47,7 +47,7 @@ public class PhoneController {
             System.out.println(title + " " + shopid);
             Goods goods = new Goods(shopid,price, name, imgurl,title);
             goodsDao.save(goods);
-            return "redirect:http://mvc.y1code.cn/#/myadmin";
+            return "redirect:http://qilu.y1code.cn/#/myadmin";
 
         }else {
             String code ="-1";
