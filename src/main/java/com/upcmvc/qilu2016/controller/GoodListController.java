@@ -57,14 +57,15 @@ public class GoodListController {
             orderid = user.getId();
             System.out.println("orderid is: " + orderid);
         }
-        return goodListDao.findByOrderidAndIspay(orderid,false);
+        return goodListDao.findByOrderidAndIspay(orderid, false);
     }
 
     @RequestMapping("/putorder")
     public Object putOrder(String address) {
         int id = 0;
+        int goodid = 0;
         String good = "您的商品为：";
-        Iterator<GoodList> goodLists = ( goodListDao.findByIspay(false)).iterator();
+        Iterator<GoodList> goodLists = (goodListDao.findByIspay(false)).iterator();
         System.out.println("pay");
         List<MailDTo> list = new ArrayList<>();
         // User user = (User) httpSession.getAttribute("user");
@@ -79,7 +80,7 @@ public class GoodListController {
             int num = goodList.getnum();
             String name = goodList.getName();
 
-            Goods goods =  goodsDao.findOne(goodsid);
+            Goods goods = goodsDao.findOne(goodsid);
             System.out.println("good id:" + goodsid);
             int shopid = goods.getShopid();
             System.out.println("shop id:" + shopid);
@@ -96,28 +97,42 @@ public class GoodListController {
         while (li.hasNext()) {
 
             MailDTo maildto = li.next();
-            if (maildto.shopid == id) {
+            if (id == 0) {
+                id = maildto.shopid;
+                System.out.println("循环开始");
+            } else if (maildto.shopid == id && li.hasNext() == true) {
                 good = good + maildto.name + " " + maildto.number + " ";
                 System.out.println("good:" + good);
             } else {
                 String temgood = "";
                 id = maildto.shopid;
-                Iterable<GoodList> goodListes =  goodListDao.findByIspay(false);
+                Iterable<GoodList> goodListes = goodListDao.findByIspay(false);
                 int count = 0;
-                for (GoodList goodlist: goodListes
-                     ) {
+                for (GoodList goodlist : goodListes
+                        ) {
                     goodlist.setIspay(true);
                     goodListDao.save(goodlist);
-                   temgood = goodlist.getName();
-                    ++count;
+                    if (goodlist.getGoodsid() == goodid) {
+                        count++;
+//                    }else if(goodid ==0){
+//                        System.out.println("开始遍历商品");
+//                        goodid = goodlist.getGoodsid();
+                    } else {
+                        temgood = temgood + " " + goodlist.getName() + "数量为：" + goodlist.getnum()+ " ";
+//                        temgood = temgood +maildto.name + " " + maildto.number + " ";
+                        System.out.println("temgood: " + temgood);
+                        System.out.println(count);
+                        count = 0;
+                    }
                 }
-                if(flag==false){
-                    good = "名字" + temgood + "数量" + count;
+                if (flag == false) {
+                    good = "名字: " + temgood;
+                    System.out.println(good);
                     flag = true;
                 }
                 MailUtils mail = new MailUtils();
-                mail.send(maildto.email, good +"地址是："+ address);
-
+                System.out.println("最终发送为：" + good);
+                mail.send(maildto.email, good + "地址是：" + address);
                 good = "您的商品为：";
 
             }
@@ -132,7 +147,7 @@ public class GoodListController {
         User user = (User) httpSession.getAttribute("user");
         int orderid;
         if (user == null)
-            return new JsonMes(-1,"您还未登录录");
+            return new JsonMes(-1, "您还未登录录");
         else orderid = user.getId();
 
         GoodList goodList = new GoodList(goodsid, orderid, num, name, price);
